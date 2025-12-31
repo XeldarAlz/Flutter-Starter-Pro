@@ -190,11 +190,6 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 This project is licensed under the Non-Commercial License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
 <p align="center">
-  Made with by <a href="https://github.com/YOURUSERNAME">Your Name</a>
-</p>
-
-<p align="center">
-  Star this repo if you found it helpful!
+  ⭐ Star this repo if you found it helpful!
 </p>
