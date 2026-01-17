@@ -90,9 +90,50 @@ final localStorageProvider = AutoDisposeProvider<LocalStorage>.internal(
 );
 
 typedef LocalStorageRef = AutoDisposeProviderRef<LocalStorage>;
-String _$apiClientHash() => r'2d3aa126b715d0e7988f237f818db6395acb9bd8';
+String _$crashReporterHash() => r'87b4e98f1982ffe4fe905417c967e0cbb3c7a4ba';
+
+/// Provider for [CrashReporter].
+///
+/// Returns [SentryCrashReporter] in production/staging when crash reporting
+/// is enabled, otherwise returns [NoOpCrashReporter].
+///
+/// Copied from [crashReporter].
+@ProviderFor(crashReporter)
+final crashReporterProvider = AutoDisposeProvider<CrashReporter>.internal(
+  crashReporter,
+  name: r'crashReporterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$crashReporterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CrashReporterRef = AutoDisposeProviderRef<CrashReporter>;
+String _$analyticsServiceHash() => r'b072b24667e4947d1dbd33b9a4b1001141b2790a';
+
+/// Provider for [AnalyticsService].
+///
+/// Returns [FirebaseAnalyticsService] when analytics is enabled,
+/// otherwise returns [NoOpAnalyticsService].
+///
+/// Copied from [analyticsService].
+@ProviderFor(analyticsService)
+final analyticsServiceProvider = AutoDisposeProvider<AnalyticsService>.internal(
+  analyticsService,
+  name: r'analyticsServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$analyticsServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AnalyticsServiceRef = AutoDisposeProviderRef<AnalyticsService>;
+String _$apiClientHash() => r'002124d80c2fc54c69b803852ad2319132fa3cce';
 
 /// Provider for [ApiClient].
+/// Uses environment configuration for base URL and timeouts.
 ///
 /// Copied from [apiClient].
 @ProviderFor(apiClient)
