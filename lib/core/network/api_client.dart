@@ -4,17 +4,29 @@ import 'package:flutter_starter_pro/core/errors/exceptions.dart';
 import 'package:flutter_starter_pro/core/network/api_interceptors.dart';
 import 'package:flutter_starter_pro/core/storage/secure_storage.dart';
 
-/// API Client wrapper around Dio
+/// API Client wrapper around Dio.
+///
+/// Provides a convenient interface for making HTTP requests with
+/// automatic token management, error handling, and retry logic.
 class ApiClient {
+  /// Creates an ApiClient with the given configuration.
+  ///
+  /// [secureStorage] is required for token management.
+  /// [baseUrl] defaults to ApiConstants.baseUrl if not provided.
+  /// [connectionTimeout] and [receiveTimeout] can be customized per environment.
+  /// [enableLogging] controls whether request/response logging is enabled.
   ApiClient({
     required SecureStorage secureStorage,
     String? baseUrl,
+    Duration? connectionTimeout,
+    Duration? receiveTimeout,
+    bool enableLogging = true,
   }) : _secureStorage = secureStorage {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl ?? ApiConstants.baseUrl,
-        connectTimeout: ApiConstants.connectionTimeout,
-        receiveTimeout: ApiConstants.receiveTimeout,
+        connectTimeout: connectionTimeout ?? ApiConstants.connectionTimeout,
+        receiveTimeout: receiveTimeout ?? ApiConstants.receiveTimeout,
         sendTimeout: ApiConstants.sendTimeout,
         headers: {
           ApiConstants.contentTypeHeader: ApiConstants.applicationJson,
@@ -23,7 +35,7 @@ class ApiClient {
       ),
     );
 
-    _setupInterceptors();
+    _setupInterceptors(enableLogging: enableLogging);
   }
 
   late final Dio _dio;
@@ -32,9 +44,9 @@ class ApiClient {
   /// Get the Dio instance
   Dio get dio => _dio;
 
-  void _setupInterceptors() {
+  void _setupInterceptors({bool enableLogging = true}) {
     _dio.interceptors.addAll([
-      LoggingInterceptor(),
+      if (enableLogging) LoggingInterceptor(),
       AuthInterceptor(_secureStorage),
       TokenRefreshInterceptor(_dio, _secureStorage),
       RetryInterceptor(dio: _dio),
