@@ -9,6 +9,8 @@ import 'package:flutter_starter_pro/core/network/api_client.dart';
 import 'package:flutter_starter_pro/core/network/network_info.dart';
 import 'package:flutter_starter_pro/core/storage/local_storage.dart';
 import 'package:flutter_starter_pro/core/storage/secure_storage.dart';
+import 'package:flutter_starter_pro/core/sync/sync_manager.dart';
+import 'package:flutter_starter_pro/core/sync/sync_manager_impl.dart';
 import 'package:flutter_starter_pro/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_starter_pro/features/auth/data/datasources/auth_local_datasource_impl.dart';
 import 'package:flutter_starter_pro/features/auth/data/datasources/auth_remote_datasource.dart';
@@ -90,8 +92,28 @@ AnalyticsService analyticsService(Ref ref) {
 }
 
 // =============================================================================
-// Network
+// Sync Manager
 // =============================================================================
+
+/// Provider for [SyncManager].
+///
+/// Manages offline operations and syncs them when connectivity is restored.
+@riverpod
+SyncManager syncManager(Ref ref) {
+  final manager = SyncManagerImpl(
+    apiClient: ref.watch(apiClientProvider),
+    networkInfo: ref.watch(networkInfoProvider),
+    localStorage: ref.watch(localStorageProvider),
+  );
+  
+  // Initialize the manager
+  manager.initialize();
+  
+  // Dispose when provider is disposed
+  ref.onDispose(manager.dispose);
+  
+  return manager;
+}
 
 // =============================================================================
 // Network

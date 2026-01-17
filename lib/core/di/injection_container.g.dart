@@ -130,6 +130,24 @@ final analyticsServiceProvider = AutoDisposeProvider<AnalyticsService>.internal(
 );
 
 typedef AnalyticsServiceRef = AutoDisposeProviderRef<AnalyticsService>;
+String _$syncManagerHash() => r'5d6dacc8cd204ad94fe4c79505506ff2dbe7b980';
+
+/// Provider for [SyncManager].
+///
+/// Manages offline operations and syncs them when connectivity is restored.
+///
+/// Copied from [syncManager].
+@ProviderFor(syncManager)
+final syncManagerProvider = AutoDisposeProvider<SyncManager>.internal(
+  syncManager,
+  name: r'syncManagerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$syncManagerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SyncManagerRef = AutoDisposeProviderRef<SyncManager>;
 String _$apiClientHash() => r'002124d80c2fc54c69b803852ad2319132fa3cce';
 
 /// Provider for [ApiClient].
