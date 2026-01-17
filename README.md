@@ -50,6 +50,9 @@
 - **Testing Setup** — Unit, Widget, and Integration tests
 - **CI/CD Ready** — GitHub Actions workflows included
 - **Responsive** — Adaptive layouts for all screen sizes
+- **Multi-Environment** — Dev, Staging, and Production configurations
+- **Analytics Ready** — Abstracted analytics service (Firebase/Mixpanel)
+- **Crash Reporting** — Abstracted crash reporting (Sentry/Crashlytics)
 
 ## Quick Start
 
@@ -71,8 +74,12 @@ flutter pub get
 # Run code generation
 dart run build_runner build --delete-conflicting-outputs
 
-# Run the app
-flutter run
+# Run the app (development)
+flutter run -t lib/main_dev.dart
+
+# Or use make commands
+make setup    # Initial setup
+make run-dev  # Run development build
 ```
 
 ### Using as Template
@@ -108,13 +115,38 @@ lib/
 ├── shared/                  # Shared widgets and providers
 │   ├── widgets/             # Reusable UI components
 │   └── providers/           # Global providers
+├── config/                  # Environment configuration
+│   └── env/                 # Dev, Staging, Prod environments
 ├── l10n/                    # Localization files
 ├── app.dart                 # App widget
 ├── bootstrap.dart           # App initialization
-└── main.dart                # Entry point
+├── main.dart                # Default entry point
+├── main_dev.dart            # Development entry point
+├── main_staging.dart        # Staging entry point
+└── main_prod.dart           # Production entry point
 ```
 
 [See full architecture documentation](docs/ARCHITECTURE.md)
+
+## Environment Configuration
+
+The app supports multiple environments (development, staging, production):
+
+```bash
+# Development (default)
+flutter run -t lib/main_dev.dart
+
+# Staging
+flutter run -t lib/main_staging.dart
+
+# Production
+flutter run -t lib/main_prod.dart --release
+```
+
+Each environment has its own configuration in `lib/config/env/`:
+- `dev_environment.dart` - Development settings (debug enabled, relaxed timeouts)
+- `staging_environment.dart` - Staging settings (crash reporting enabled)
+- `prod_environment.dart` - Production settings (analytics, crash reporting)
 
 ## Customization
 
@@ -129,10 +161,16 @@ static const Color secondary = Color(0xFF10B981);
 
 ### API Configuration
 
-Edit `lib/core/constants/api_constants.dart`:
+Edit environment files in `lib/config/env/`:
 
 ```dart
-static const String baseUrl = 'https://your-api.com/v1';
+// lib/config/env/dev_environment.dart
+@override
+String get baseUrl => 'https://dev-api.your-domain.com/v1';
+
+// lib/config/env/prod_environment.dart
+@override
+String get baseUrl => 'https://api.your-domain.com/v1';
 ```
 
 ### Add New Feature
@@ -162,18 +200,42 @@ genhtml coverage/lcov.info -o coverage/html
 ## Build
 
 ```bash
-# Android APK
-flutter build apk --release
+# Android APK (development)
+flutter build apk -t lib/main_dev.dart
 
-# Android App Bundle
-flutter build appbundle --release
+# Android APK (production)
+flutter build apk --release -t lib/main_prod.dart
 
-# iOS
-flutter build ios --release
+# Android App Bundle (production)
+flutter build appbundle --release -t lib/main_prod.dart
 
-# Web
-flutter build web --release
+# iOS (production)
+flutter build ios --release -t lib/main_prod.dart
+
+# Web (production)
+flutter build web --release -t lib/main_prod.dart
 ```
+
+## Make Commands
+
+This project includes a Makefile for common tasks:
+
+| Command | Description |
+|---------|-------------|
+| `make setup` | Initial project setup |
+| `make run-dev` | Run development build |
+| `make run-staging` | Run staging build |
+| `make run-prod` | Run production build |
+| `make gen` | Run code generation |
+| `make watch` | Run code generation in watch mode |
+| `make test` | Run all tests |
+| `make coverage` | Run tests with coverage |
+| `make lint` | Run linter |
+| `make format` | Format code |
+| `make clean` | Clean build artifacts |
+| `make build-android-prod` | Build production APK |
+| `make build-ios-prod` | Build production iOS |
+| `make help` | Show all available commands |
 
 ## Contributing
 
