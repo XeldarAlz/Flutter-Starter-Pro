@@ -173,7 +173,7 @@ abstract class PaginatedNotifier<T> extends StateNotifier<PaginatedState<T>> {
 
   /// Refresh the list (reload from first page)
   Future<void> refresh() async {
-    await loadInitial(params: _currentParams.copyWith(page: 1, cursor: null));
+    await loadInitial(params: _currentParams.copyWith(page: 1));
   }
 
   /// Update sort order and reload
@@ -183,7 +183,6 @@ abstract class PaginatedNotifier<T> extends StateNotifier<PaginatedState<T>> {
         sortBy: sortBy,
         sortOrder: order ?? _currentParams.sortOrder,
         page: 1,
-        cursor: null,
       ),
     );
   }

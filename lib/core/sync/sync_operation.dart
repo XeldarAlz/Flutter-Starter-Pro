@@ -18,6 +18,24 @@ class SyncOperation extends Equatable {
     this.error,
   });
 
+  /// Create from JSON
+  factory SyncOperation.fromJson(Map<String, dynamic> json) {
+    return SyncOperation(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      endpoint: json['endpoint'] as String,
+      method: SyncMethod.values.byName(json['method'] as String),
+      data: json['data'] as Map<String, dynamic>?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      retryCount: json['retryCount'] as int? ?? 0,
+      maxRetries: json['maxRetries'] as int? ?? 3,
+      lastAttempt: json['lastAttempt'] != null
+          ? DateTime.parse(json['lastAttempt'] as String)
+          : null,
+      error: json['error'] as String?,
+    );
+  }
+
   /// Unique identifier for this operation
   final String id;
 
@@ -86,24 +104,6 @@ class SyncOperation extends Equatable {
     };
   }
 
-  /// Create from JSON
-  factory SyncOperation.fromJson(Map<String, dynamic> json) {
-    return SyncOperation(
-      id: json['id'] as String,
-      type: json['type'] as String,
-      endpoint: json['endpoint'] as String,
-      method: SyncMethod.values.byName(json['method'] as String),
-      data: json['data'] as Map<String, dynamic>?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      retryCount: json['retryCount'] as int? ?? 0,
-      maxRetries: json['maxRetries'] as int? ?? 3,
-      lastAttempt: json['lastAttempt'] != null
-          ? DateTime.parse(json['lastAttempt'] as String)
-          : null,
-      error: json['error'] as String?,
-    );
-  }
-
   @override
   List<Object?> get props => [
         id,
@@ -160,5 +160,6 @@ class SyncResult {
   final String? error;
 
   bool get isSuccess => status == SyncStatus.completed;
-  bool get isFailed => status == SyncStatus.failed || status == SyncStatus.abandoned;
+  bool get isFailed =>
+      status == SyncStatus.failed || status == SyncStatus.abandoned;
 }

@@ -8,8 +8,6 @@ import 'package:flutter_starter_pro/core/sync/sync_manager.dart';
 import 'package:flutter_starter_pro/core/sync/sync_operation.dart';
 import 'package:flutter_starter_pro/core/utils/logger.dart';
 
-// ignore_for_file: require_trailing_commas
-
 /// Default implementation of [SyncManager].
 ///
 /// Persists operations to local storage and processes them
@@ -43,21 +41,20 @@ class SyncManagerImpl implements SyncManager {
 
   @override
   Future<void> initialize() async {
-    // Listen for connectivity changes
     _connectivitySubscription = networkInfo.onConnectivityChanged.listen(
       (isConnected) {
         if (isConnected && !_isSyncing) {
-          // Auto-sync when connection is restored
           processQueue();
         }
       },
     );
 
-    // Update initial state
     final pending = await getPendingOperations();
     _updateState(_currentState.copyWith(pendingCount: pending.length));
 
-    AppLogger.info('SyncManager initialized with ${pending.length} pending operations');
+    AppLogger.info(
+      'SyncManager initialized with ${pending.length} pending operations',
+    );
   }
 
   @override
@@ -66,13 +63,14 @@ class SyncManagerImpl implements SyncManager {
     operations.add(operation);
     await _saveOperations(operations);
 
-    _updateState(_currentState.copyWith(
-      pendingCount: operations.length,
-    ));
+    _updateState(
+      _currentState.copyWith(
+        pendingCount: operations.length,
+      ),
+    );
 
     AppLogger.debug('Enqueued sync operation: ${operation.type}');
 
-    // Try to process immediately if online
     if (await networkInfo.isConnected && !_isSyncing) {
       unawaited(processQueue());
     }
@@ -84,9 +82,11 @@ class SyncManagerImpl implements SyncManager {
     operations.removeWhere((op) => op.id == operationId);
     await _saveOperations(operations);
 
-    _updateState(_currentState.copyWith(
-      pendingCount: operations.length,
-    ));
+    _updateState(
+      _currentState.copyWith(
+        pendingCount: operations.length,
+      ),
+    );
   }
 
   @override
@@ -97,9 +97,11 @@ class SyncManagerImpl implements SyncManager {
     }
 
     if (!await networkInfo.isConnected) {
-      _updateState(_currentState.copyWith(
-        status: SyncManagerStatus.waitingForConnection,
-      ));
+      _updateState(
+        _currentState.copyWith(
+          status: SyncManagerStatus.waitingForConnection,
+        ),
+      );
       return [];
     }
 
@@ -118,14 +120,13 @@ class SyncManagerImpl implements SyncManager {
       results.add(result);
 
       if (result.isSuccess) {
-        // Operation completed, don't add to remaining
         AppLogger.info('Sync operation completed: ${operation.type}');
       } else if (operation.canRetry) {
-        // Retry later
         remainingOperations.add(operation.copyWithRetry(error: result.error));
-        AppLogger.warning('Sync operation failed, will retry: ${operation.type}');
+        AppLogger.warning(
+          'Sync operation failed, will retry: ${operation.type}',
+        );
       } else {
-        // Max retries exceeded, mark as failed
         failedCount++;
         AppLogger.error('Sync operation abandoned: ${operation.type}');
       }
@@ -134,12 +135,16 @@ class SyncManagerImpl implements SyncManager {
     await _saveOperations(remainingOperations);
 
     _isSyncing = false;
-    _updateState(SyncState(
-      status: failedCount > 0 ? SyncManagerStatus.error : SyncManagerStatus.completed,
-      pendingCount: remainingOperations.length,
-      failedCount: failedCount,
-      lastSyncTime: DateTime.now(),
-    ));
+    _updateState(
+      SyncState(
+        status: failedCount > 0
+            ? SyncManagerStatus.error
+            : SyncManagerStatus.completed,
+        pendingCount: remainingOperations.length,
+        failedCount: failedCount,
+        lastSyncTime: DateTime.now(),
+      ),
+    );
 
     return results;
   }
@@ -206,10 +211,12 @@ class SyncManagerImpl implements SyncManager {
     final operations = await _loadOperations();
     final remaining = operations.where((op) => op.canRetry).toList();
     await _saveOperations(remaining);
-    _updateState(_currentState.copyWith(
-      pendingCount: remaining.length,
-      failedCount: 0,
-    ));
+    _updateState(
+      _currentState.copyWith(
+        pendingCount: remaining.length,
+        failedCount: 0,
+      ),
+    );
   }
 
   @override

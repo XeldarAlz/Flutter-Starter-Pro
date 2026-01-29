@@ -29,6 +29,42 @@ class PaginatedList<T> extends Equatable {
     this.previousCursor,
   });
 
+  /// Create from API response JSON.
+  ///
+  /// Supports common pagination response formats:
+  /// - { data: [...], meta: { current_page, last_page, total, per_page } }
+  /// - { items: [...], page, total_pages, total, limit }
+  /// - { results: [...], count, next, previous }
+  factory PaginatedList.fromJson(
+    Map<String, dynamic> json,
+    T Function(Map<String, dynamic>) fromJsonT,
+  ) {
+    final itemsJson = json['data'] ??
+        json['items'] ??
+        json['results'] ??
+        json['content'] ??
+        <dynamic>[];
+
+    final items = (itemsJson as List<dynamic>)
+        .map((item) => fromJsonT(item as Map<String, dynamic>))
+        .toList();
+
+    final meta = json['meta'] as Map<String, dynamic>? ?? json;
+
+    return PaginatedList<T>(
+      items: items,
+      currentPage: meta['current_page'] as int? ?? meta['page'] as int? ?? 1,
+      totalPages: meta['last_page'] as int? ?? meta['total_pages'] as int? ?? 1,
+      totalItems:
+          meta['total'] as int? ?? meta['count'] as int? ?? items.length,
+      itemsPerPage: meta['per_page'] as int? ?? meta['limit'] as int? ?? 20,
+      nextCursor: meta['next_cursor'] as String? ??
+          _extractCursor(meta['next'] as String?),
+      previousCursor: meta['previous_cursor'] as String? ??
+          _extractCursor(meta['previous'] as String?),
+    );
+  }
+
   /// Items for the current page
   final List<T> items;
 
@@ -74,56 +110,11 @@ class PaginatedList<T> extends Equatable {
   /// Create an empty paginated list
   static PaginatedList<T> empty<T>() {
     return PaginatedList<T>(
-      items: [],
+      items: const [],
       currentPage: 1,
       totalPages: 0,
       totalItems: 0,
       itemsPerPage: 20,
-    );
-  }
-
-  /// Create from API response JSON.
-  ///
-  /// Supports common pagination response formats:
-  /// - { data: [...], meta: { current_page, last_page, total, per_page } }
-  /// - { items: [...], page, total_pages, total, limit }
-  /// - { results: [...], count, next, previous }
-  factory PaginatedList.fromJson(
-    Map<String, dynamic> json,
-    T Function(Map<String, dynamic>) fromJsonT,
-  ) {
-    // Extract items from various formats
-    final itemsJson = json['data'] ??
-        json['items'] ??
-        json['results'] ??
-        json['content'] ??
-        <dynamic>[];
-
-    final items = (itemsJson as List<dynamic>)
-        .map((item) => fromJsonT(item as Map<String, dynamic>))
-        .toList();
-
-    // Extract meta from nested or flat structure
-    final meta = json['meta'] as Map<String, dynamic>? ?? json;
-
-    return PaginatedList<T>(
-      items: items,
-      currentPage: meta['current_page'] as int? ??
-          meta['page'] as int? ??
-          1,
-      totalPages: meta['last_page'] as int? ??
-          meta['total_pages'] as int? ??
-          1,
-      totalItems: meta['total'] as int? ??
-          meta['count'] as int? ??
-          items.length,
-      itemsPerPage: meta['per_page'] as int? ??
-          meta['limit'] as int? ??
-          20,
-      nextCursor: meta['next_cursor'] as String? ??
-          _extractCursor(meta['next'] as String?),
-      previousCursor: meta['previous_cursor'] as String? ??
-          _extractCursor(meta['previous'] as String?),
     );
   }
 
