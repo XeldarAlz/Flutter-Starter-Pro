@@ -1,6 +1,5 @@
 import 'package:flutter_starter_pro/app.dart';
 import 'package:flutter_starter_pro/bootstrap.dart';
-import 'package:flutter_starter_pro/config/env/dev_environment.dart';
 
 /// Default entry point (uses development environment).
 ///
@@ -8,9 +7,8 @@ import 'package:flutter_starter_pro/config/env/dev_environment.dart';
 /// - `lib/main_dev.dart` for development
 /// - `lib/main_staging.dart` for staging
 /// - `lib/main_prod.dart` for production
-void main() {
-  bootstrap(
+void main() async {
+  await bootstrap(
     builder: (localStorage) => App(localStorage: localStorage),
-    environment: const DevEnvironment(),
   );
 }

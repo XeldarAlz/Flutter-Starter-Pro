@@ -11,8 +11,8 @@ import 'package:flutter_starter_pro/l10n/generated/app_localizations.dart';
 /// Main application widget
 class App extends ConsumerWidget {
   const App({
-    super.key,
     required this.localStorage,
+    super.key,
   });
 
   final LocalStorage localStorage;
@@ -25,16 +25,10 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-
-      // Theme
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
-
-      // Routing
       routerConfig: router,
-
-      // Localization
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -42,11 +36,8 @@ class App extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-
-      // Builder for additional customization
       builder: (context, child) {
         return MediaQuery(
-          // Prevent system font scaling
           data: MediaQuery.of(context).copyWith(
             textScaler: TextScaler.noScaling,
           ),
@@ -56,4 +47,3 @@ class App extends ConsumerWidget {
     );
   }
 }
-

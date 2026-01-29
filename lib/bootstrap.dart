@@ -11,6 +11,7 @@ import 'package:flutter_starter_pro/core/storage/local_storage.dart';
 import 'package:flutter_starter_pro/core/utils/logger.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_starter_pro/core/di/injection_container.dart';
 
 /// Bootstrap configuration
 typedef AppBuilder = Widget Function(LocalStorage localStorage);
@@ -31,23 +32,18 @@ Future<void> bootstrap({
   required AppBuilder builder,
   AppEnvironment environment = const DevEnvironment(),
 }) async {
-  // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Initialize Hive
   await Hive.initFlutter();
 
-  // Initialize SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
   final localStorage = LocalStorage(sharedPrefs);
 
-  // Set up error handling
   FlutterError.onError = (details) {
     if (environment.enableLogging) {
       AppLogger.error(
@@ -60,14 +56,8 @@ Future<void> bootstrap({
     if (kDebugMode) {
       FlutterError.dumpErrorToConsole(details);
     }
-
-    // TODO: Report to crash reporting service when enabled
-    // if (environment.enableCrashReporting) {
-    //   CrashReporter.captureException(details.exception, details.stack);
-    // }
   };
 
-  // Handle async errors
   PlatformDispatcher.instance.onError = (error, stack) {
     if (environment.enableLogging) {
       AppLogger.error(
@@ -76,30 +66,37 @@ Future<void> bootstrap({
         stackTrace: stack,
       );
     }
-
-    // TODO: Report to crash reporting service when enabled
-    // if (environment.enableCrashReporting) {
-    //   CrashReporter.captureException(error, stack);
-    // }
-
     return true;
   };
 
-  // Log environment info
   if (environment.enableLogging) {
     AppLogger.info('Starting app in ${environment.name} environment');
     AppLogger.info('API Base URL: ${environment.baseUrl}');
   }
 
-  // Run the app with environment override
-  runApp(
-    ProviderScope(
-      overrides: [
-        environmentProvider.overrideWithValue(environment),
-      ],
-      child: builder(localStorage),
+  runZonedGuarded(
+    () => runApp(
+      ProviderScope(
+        overrides: [
+          environmentProvider.overrideWithValue(environment),
+          sharedPreferencesProvider.overrideWithValue(sharedPrefs),
+        ],
+        child: builder(localStorage),
+      ),
     ),
+    (error, stack) {
+      if (environment.enableLogging) {
+        AppLogger.error(
+          'Zone Error',
+          error: error,
+          stackTrace: stack,
+        );
+      }
+
+      if (kDebugMode || environment.enableLogging) {
+        debugPrint('Caught zone error: $error');
+        debugPrint(stack.toString());
+      }
+    },
   );
 }
-
-

@@ -6,8 +6,8 @@ import 'package:flutter_starter_pro/config/env/prod_environment.dart';
 ///
 /// Run with: flutter run -t lib/main_prod.dart --release
 /// Or: flutter run --flavor prod -t lib/main_prod.dart --release
-void main() {
-  bootstrap(
+void main() async {
+  await bootstrap(
     builder: (localStorage) => App(localStorage: localStorage),
     environment: const ProdEnvironment(),
   );
