@@ -29,7 +29,6 @@ class AnalyticsScreen extends ConsumerWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          // TODO: Refresh analytics data
           await Future<void>.delayed(const Duration(seconds: 1));
         },
         child: SingleChildScrollView(
@@ -38,33 +37,22 @@ class AnalyticsScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Period Selector
               _buildPeriodSelector(context),
               const SizedBox(height: 20),
-
-              // Summary Cards
               _buildSummaryCards(context),
               const SizedBox(height: 24),
-
-              // Chart Section
               _buildSectionTitle(context, 'Performance'),
               const SizedBox(height: 12),
               _buildChartCard(context),
               const SizedBox(height: 24),
-
-              // Metrics Grid
               _buildSectionTitle(context, 'Key Metrics'),
               const SizedBox(height: 12),
               _buildMetricsGrid(context),
               const SizedBox(height: 24),
-
-              // Activity Chart
               _buildSectionTitle(context, 'Weekly Activity'),
               const SizedBox(height: 12),
               _buildActivityChart(context),
               const SizedBox(height: 24),
-
-              // Top Items
               _buildSectionTitle(context, 'Top Performing'),
               const SizedBox(height: 12),
               _buildTopItemsList(context),
@@ -103,9 +91,7 @@ class AnalyticsScreen extends ConsumerWidget {
     return FilterChip(
       label: Text(label),
       selected: isSelected,
-      onSelected: (_) {
-        // TODO: Change period
-      },
+      onSelected: (_) {},
       backgroundColor: context.colorScheme.surface,
       selectedColor: context.colorScheme.primaryContainer,
       labelStyle: TextStyle(
@@ -270,7 +256,7 @@ class AnalyticsScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    '\$12,450',
+                    r'$12,450',
                     style: context.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -279,9 +265,11 @@ class AnalyticsScreen extends ConsumerWidget {
               ),
               Row(
                 children: [
-                  _buildLegendItem(context, 'This week', context.colorScheme.primary),
+                  _buildLegendItem(
+                      context, 'This week', context.colorScheme.primary),
                   const SizedBox(width: 16),
-                  _buildLegendItem(context, 'Last week', context.colorScheme.outline),
+                  _buildLegendItem(
+                      context, 'Last week', context.colorScheme.outline),
                 ],
               ),
             ],
@@ -616,7 +604,7 @@ class AnalyticsScreen extends ConsumerWidget {
     );
   }
 
-  void _showDateRangePicker(BuildContext context) async {
+  Future<void> _showDateRangePicker(BuildContext context) async {
     await showDateRangePicker(
       context: context,
       firstDate: DateTime(2020),

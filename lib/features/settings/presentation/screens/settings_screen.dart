@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_pro/core/extensions/context_extensions.dart';
 import 'package:flutter_starter_pro/core/router/routes.dart';
 import 'package:flutter_starter_pro/core/theme/theme_provider.dart';
+import 'package:flutter_starter_pro/features/auth/domain/entities/user.dart';
 import 'package:flutter_starter_pro/features/auth/presentation/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
@@ -20,7 +21,7 @@ class SettingsScreen extends ConsumerWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Iconsax.arrow_left),
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text('Settings'),
       ),
@@ -29,11 +30,8 @@ class SettingsScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Section
             _buildProfileSection(context, user),
             const SizedBox(height: 24),
-
-            // Appearance Section
             _buildSectionTitle(context, 'Appearance'),
             const SizedBox(height: 12),
             _buildSettingTile(
@@ -56,8 +54,6 @@ class SettingsScreen extends ConsumerWidget {
               onTap: () => _showThemeDialog(context, ref, themeMode),
             ),
             const SizedBox(height: 24),
-
-            // Preferences Section
             _buildSectionTitle(context, 'Preferences'),
             const SizedBox(height: 12),
             _buildSettingTile(
@@ -65,22 +61,16 @@ class SettingsScreen extends ConsumerWidget {
               icon: Iconsax.global,
               title: 'Language',
               subtitle: 'English',
-              onTap: () {
-                // TODO: Show language picker
-              },
+              onTap: () {},
             ),
             _buildSettingTile(
               context,
               icon: Iconsax.notification,
               title: 'Notifications',
               subtitle: 'Manage notifications',
-              onTap: () {
-                // TODO: Navigate to notifications settings
-              },
+              onTap: () {},
             ),
             const SizedBox(height: 24),
-
-            // Security Section
             _buildSectionTitle(context, 'Security'),
             const SizedBox(height: 12),
             _buildSettingTile(
@@ -88,9 +78,7 @@ class SettingsScreen extends ConsumerWidget {
               icon: Iconsax.lock,
               title: 'Change Password',
               subtitle: 'Update your password',
-              onTap: () {
-                // TODO: Navigate to change password
-              },
+              onTap: () {},
             ),
             _buildSettingTile(
               context,
@@ -99,14 +87,10 @@ class SettingsScreen extends ConsumerWidget {
               subtitle: 'Use fingerprint or face ID',
               trailing: Switch(
                 value: false,
-                onChanged: (_) {
-                  // TODO: Toggle biometric
-                },
+                onChanged: (_) {},
               ),
             ),
             const SizedBox(height: 24),
-
-            // About Section
             _buildSectionTitle(context, 'About'),
             const SizedBox(height: 12),
             _buildSettingTile(
@@ -114,29 +98,21 @@ class SettingsScreen extends ConsumerWidget {
               icon: Iconsax.info_circle,
               title: 'About',
               subtitle: 'Version 1.0.0',
-              onTap: () {
-                // TODO: Show about dialog
-              },
+              onTap: () {},
             ),
             _buildSettingTile(
               context,
               icon: Iconsax.document_text,
               title: 'Terms of Service',
-              onTap: () {
-                // TODO: Open terms
-              },
+              onTap: () {},
             ),
             _buildSettingTile(
               context,
               icon: Iconsax.shield_tick,
               title: 'Privacy Policy',
-              onTap: () {
-                // TODO: Open privacy
-              },
+              onTap: () {},
             ),
             const SizedBox(height: 24),
-
-            // Logout Button
             _buildLogoutButton(context, ref),
             const SizedBox(height: 32),
           ],
@@ -145,7 +121,7 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProfileSection(BuildContext context, dynamic user) {
+  Widget _buildProfileSection(BuildContext context, User? user) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -190,9 +166,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           IconButton(
             icon: const Icon(Iconsax.edit),
-            onPressed: () {
-              // TODO: Navigate to edit profile
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -403,4 +377,3 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 }
-

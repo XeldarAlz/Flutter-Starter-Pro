@@ -30,63 +30,46 @@ class ProfileScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // Profile Header
             _buildProfileHeader(context, user),
             const SizedBox(height: 24),
-
-            // Stats Section
             _buildStatsSection(context),
             const SizedBox(height: 24),
-
-            // Menu Items
             _buildMenuItem(
               context,
               icon: Iconsax.user_edit,
               title: 'Edit Profile',
               subtitle: 'Update your personal information',
-              onTap: () {
-                // TODO: Navigate to edit profile
-              },
+              onTap: () {},
             ),
             _buildMenuItem(
               context,
               icon: Iconsax.security_safe,
               title: 'Security',
               subtitle: 'Password and authentication',
-              onTap: () {
-                // TODO: Navigate to security settings
-              },
+              onTap: () {},
             ),
             _buildMenuItem(
               context,
               icon: Iconsax.notification,
               title: 'Notifications',
               subtitle: 'Configure your notifications',
-              onTap: () {
-                // TODO: Navigate to notification settings
-              },
+              onTap: () {},
             ),
             _buildMenuItem(
               context,
               icon: Iconsax.document_text,
               title: 'Activity Log',
               subtitle: 'View your recent activity',
-              onTap: () {
-                // TODO: Navigate to activity log
-              },
+              onTap: () {},
             ),
             _buildMenuItem(
               context,
               icon: Iconsax.star,
               title: 'Favorites',
               subtitle: 'Your saved items',
-              onTap: () {
-                // TODO: Navigate to favorites
-              },
+              onTap: () {},
             ),
             const SizedBox(height: 24),
-
-            // Account Status
             _buildAccountStatus(context, user),
           ],
         ),
@@ -97,7 +80,6 @@ class ProfileScreen extends ConsumerWidget {
   Widget _buildProfileHeader(BuildContext context, User? user) {
     return Column(
       children: [
-        // Avatar
         Stack(
           children: [
             Container(
@@ -124,7 +106,7 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                         errorWidget: (context, url, error) => _buildInitials(
                           context,
-                          user?.initials ?? 'U',
+                          user.initials,
                         ),
                       ),
                     )
@@ -151,17 +133,13 @@ class ProfileScreen extends ConsumerWidget {
                     size: 16,
                     color: context.colorScheme.onPrimary,
                   ),
-                  onPressed: () {
-                    // TODO: Change profile photo
-                  },
+                  onPressed: () {},
                 ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-
-        // Name
         Text(
           user?.displayName ?? 'User',
           style: context.textTheme.headlineSmall?.copyWith(
@@ -169,8 +147,6 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 4),
-
-        // Email
         Text(
           user?.email ?? '',
           style: context.textTheme.bodyMedium?.copyWith(
@@ -178,8 +154,6 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 8),
-
-        // Member since
         if (user?.createdAt != null)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -378,9 +352,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           if (!isVerified)
             TextButton(
-              onPressed: () {
-                // TODO: Resend verification email
-              },
+              onPressed: () {},
               child: const Text('Verify'),
             ),
         ],
@@ -390,8 +362,18 @@ class ProfileScreen extends ConsumerWidget {
 
   String _formatDate(DateTime date) {
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.year}';
   }

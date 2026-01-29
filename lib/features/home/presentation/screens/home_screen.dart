@@ -36,9 +36,7 @@ class HomeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Iconsax.notification),
-            onPressed: () {
-              // TODO: Navigate to notifications
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Iconsax.setting_2),
@@ -51,11 +49,8 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome Card
             _buildWelcomeCard(context),
             const SizedBox(height: 24),
-
-            // Quick Actions
             Text(
               'Quick Actions',
               style: context.textTheme.titleMedium?.copyWith(
@@ -65,8 +60,6 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             _buildQuickActions(context),
             const SizedBox(height: 24),
-
-            // Stats Section
             Text(
               'Overview',
               style: context.textTheme.titleMedium?.copyWith(
@@ -76,8 +69,6 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             _buildStatsGrid(context),
             const SizedBox(height: 24),
-
-            // Recent Activity
             Text(
               'Recent Activity',
               style: context.textTheme.titleMedium?.copyWith(
@@ -282,7 +273,7 @@ class HomeScreen extends ConsumerWidget {
           context,
           icon: Iconsax.chart,
           title: 'Revenue',
-          value: '\$9,876',
+          value: r'$9,876',
           trend: '+23%',
           isPositive: true,
         ),
@@ -369,19 +360,19 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildRecentActivity(BuildContext context) {
     final activities = [
-      _Activity(
+      const _Activity(
         icon: Iconsax.user_add,
         title: 'New user registered',
         subtitle: '2 minutes ago',
         color: Colors.blue,
       ),
-      _Activity(
+      const _Activity(
         icon: Iconsax.document_upload,
         title: 'File uploaded',
         subtitle: '15 minutes ago',
         color: Colors.green,
       ),
-      _Activity(
+      const _Activity(
         icon: Iconsax.setting_2,
         title: 'Settings updated',
         subtitle: '1 hour ago',
@@ -474,4 +465,3 @@ class _Activity {
   final String subtitle;
   final Color color;
 }
-

@@ -21,26 +21,26 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   int _currentPage = 0;
 
   final List<_OnboardingPage> _pages = [
-    _OnboardingPage(
+    const _OnboardingPage(
       icon: Iconsax.code,
       title: 'Clean Architecture',
       description:
           'Built with clean architecture principles for scalability, testability, and maintainability.',
-      color: const Color(0xFF6366F1),
+      color: Color(0xFF6366F1),
     ),
-    _OnboardingPage(
+    const _OnboardingPage(
       icon: Iconsax.flash_1,
       title: 'Modern State Management',
       description:
           'Powered by Riverpod 2.0 for reactive, type-safe, and efficient state management.',
-      color: const Color(0xFF10B981),
+      color: Color(0xFF10B981),
     ),
-    _OnboardingPage(
-      icon: Iconsax.rocket,
+    const _OnboardingPage(
+      icon: Icons.rocket_launch,
       title: 'Ready to Ship',
       description:
           'Everything you need to build production-ready Flutter apps in record time.',
-      color: const Color(0xFFF59E0B),
+      color: Color(0xFFF59E0B),
     ),
   ];
 
@@ -79,7 +79,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Skip Button
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
@@ -95,8 +94,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
               ),
             ),
-
-            // Page View
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -111,20 +108,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 },
               ),
             ),
-
-            // Indicators
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   _pages.length,
-                  (index) => _buildIndicator(index),
+                  _buildIndicator,
                 ),
               ),
             ),
-
-            // Buttons
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
               child: Row(
@@ -166,7 +159,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Icon with animated container
           TweenAnimationBuilder<double>(
             tween: Tween(begin: 0.8, end: 1),
             duration: const Duration(milliseconds: 600),
@@ -205,8 +197,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             },
           ),
           const SizedBox(height: 48),
-
-          // Title
           Text(
             page.title,
             style: context.textTheme.headlineMedium?.copyWith(
@@ -215,8 +205,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-
-          // Description
           Text(
             page.description,
             style: context.textTheme.bodyLarge?.copyWith(
@@ -261,4 +249,3 @@ class _OnboardingPage {
   final String description;
   final Color color;
 }
-
