@@ -63,7 +63,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Iconsax.arrow_left),
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: SafeArea(
@@ -74,7 +74,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Title
                 Text(
                   'Create Account',
                   style: context.textTheme.headlineMedium?.copyWith(
@@ -89,19 +88,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-
-                // Name Input
                 AppTextInput(
                   controller: _nameController,
                   label: 'Full Name',
                   hint: 'Enter your full name',
                   prefixIcon: Iconsax.user,
                   textInputAction: TextInputAction.next,
-                  validator: (value) => Validators.name(value, fieldName: 'Name'),
+                  validator: Validators.name,
                 ),
                 const SizedBox(height: 16),
-
-                // Email Input
                 AppTextInput(
                   controller: _emailController,
                   label: 'Email',
@@ -112,8 +107,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   validator: Validators.email,
                 ),
                 const SizedBox(height: 16),
-
-                // Password Input
                 AppTextInput(
                   controller: _passwordController,
                   label: 'Password',
@@ -134,8 +127,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   validator: Validators.password,
                 ),
                 const SizedBox(height: 16),
-
-                // Confirm Password Input
                 AppTextInput(
                   controller: _confirmPasswordController,
                   label: 'Confirm Password',
@@ -160,8 +151,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Terms and Conditions
                 Row(
                   children: [
                     Checkbox(
@@ -200,8 +189,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-
-                // Error Message
                 if (authState.hasError && authState.errorMessage != null)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -229,16 +216,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       ],
                     ),
                   ),
-
-                // Register Button
                 PrimaryButton(
                   onPressed: _handleRegister,
                   isLoading: authState.isLoading,
                   text: 'Create Account',
                 ),
                 const SizedBox(height: 32),
-
-                // Sign In Link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -247,7 +230,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       style: context.textTheme.bodyMedium,
                     ),
                     TextButton(
-                      onPressed: () => context.pop(),
+                      onPressed: () => Navigator.of(context).pop(),
                       child: const Text('Sign In'),
                     ),
                   ],
@@ -260,4 +243,3 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 }
-

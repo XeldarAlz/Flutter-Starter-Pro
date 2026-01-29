@@ -5,7 +5,7 @@ import 'package:flutter_starter_pro/core/utils/validators.dart';
 import 'package:flutter_starter_pro/features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter_starter_pro/shared/widgets/buttons/primary_button.dart';
 import 'package:flutter_starter_pro/shared/widgets/inputs/text_input.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:iconsax/iconsax.dart';
 
 /// Forgot password screen
@@ -50,13 +50,15 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Iconsax.arrow_left),
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: _emailSent ? _buildSuccessContent() : _buildFormContent(authState),
+          child: _emailSent
+              ? _buildSuccessContent()
+              : _buildFormContent(authState),
         ),
       ),
     );
@@ -69,8 +71,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 40),
-
-          // Icon
           Container(
             width: 80,
             height: 80,
@@ -85,8 +85,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             ),
           ),
           const SizedBox(height: 24),
-
-          // Title
           Text(
             'Forgot Password?',
             style: context.textTheme.headlineMedium?.copyWith(
@@ -103,8 +101,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
-
-          // Email Input
           AppTextInput(
             controller: _emailController,
             label: 'Email',
@@ -116,8 +112,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
             validator: Validators.email,
           ),
           const SizedBox(height: 24),
-
-          // Error Message
           if (authState.hasError && authState.errorMessage != null)
             Container(
               padding: const EdgeInsets.all(12),
@@ -145,18 +139,14 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                 ],
               ),
             ),
-
-          // Submit Button
           PrimaryButton(
             onPressed: _handleResetPassword,
             isLoading: authState.isLoading,
             text: 'Reset Password',
           ),
           const SizedBox(height: 24),
-
-          // Back to Login
           TextButton.icon(
-            onPressed: () => context.pop(),
+            onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(Iconsax.arrow_left, size: 18),
             label: const Text('Back to Sign In'),
           ),
@@ -170,8 +160,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 60),
-
-        // Success Icon
         Container(
           width: 100,
           height: 100,
@@ -186,8 +174,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           ),
         ),
         const SizedBox(height: 32),
-
-        // Title
         Text(
           'Check Your Email',
           style: context.textTheme.headlineMedium?.copyWith(
@@ -196,8 +182,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
-
-        // Description
         Text(
           "We've sent a password reset link to:",
           style: context.textTheme.bodyLarge?.copyWith(
@@ -214,8 +198,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
-
-        // Info Card
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -239,8 +221,6 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           ),
         ),
         const SizedBox(height: 32),
-
-        // Resend Button
         OutlinedButton(
           onPressed: () {
             setState(() {
@@ -250,14 +230,11 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           child: const Text('Try Another Email'),
         ),
         const SizedBox(height: 16),
-
-        // Back to Login
         PrimaryButton(
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.of(context).pop(),
           text: 'Back to Sign In',
         ),
       ],
     );
   }
 }
-

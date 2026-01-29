@@ -58,8 +58,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 40),
-
-                // Logo and Title
                 Icon(
                   Iconsax.code,
                   size: 64,
@@ -82,8 +80,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 48),
-
-                // Email Input
                 AppTextInput(
                   controller: _emailController,
                   label: 'Email',
@@ -94,8 +90,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   validator: Validators.email,
                 ),
                 const SizedBox(height: 16),
-
-                // Password Input
                 AppTextInput(
                   controller: _passwordController,
                   label: 'Password',
@@ -117,8 +111,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   validator: Validators.simplePassword,
                 ),
                 const SizedBox(height: 16),
-
-                // Remember Me & Forgot Password
                 Row(
                   children: [
                     Checkbox(
@@ -141,8 +133,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-
-                // Error Message
                 if (authState.hasError && authState.errorMessage != null)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -170,16 +160,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ],
                     ),
                   ),
-
-                // Login Button
                 PrimaryButton(
                   onPressed: _handleLogin,
                   isLoading: authState.isLoading,
                   text: 'Sign In',
                 ),
                 const SizedBox(height: 24),
-
-                // Divider
                 Row(
                   children: [
                     const Expanded(child: Divider()),
@@ -196,21 +182,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-
-                // Social Login Buttons
                 OutlinedButton.icon(
-                  onPressed: () {
-                    // TODO: Implement Google Sign In
-                  },
-                  icon: const Icon(Iconsax.google),
+                  onPressed: () {},
+                  icon: const Icon(Icons.public),
                   label: const Text('Continue with Google'),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
                 const SizedBox(height: 32),
-
-                // Sign Up Link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -232,4 +212,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-
