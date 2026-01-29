@@ -13,6 +13,20 @@ class UserModel extends User {
     super.updatedAt,
   });
 
+  /// Create UserModel from User entity
+  factory UserModel.fromEntity(User user) {
+    return UserModel(
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      avatarUrl: user.avatarUrl,
+      phoneNumber: user.phoneNumber,
+      isEmailVerified: user.isEmailVerified,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    );
+  }
+
   /// Create UserModel from JSON
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -45,20 +59,6 @@ class UserModel extends User {
     };
   }
 
-  /// Create UserModel from User entity
-  factory UserModel.fromEntity(User user) {
-    return UserModel(
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      avatarUrl: user.avatarUrl,
-      phoneNumber: user.phoneNumber,
-      isEmailVerified: user.isEmailVerified,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    );
-  }
-
   /// Convert to User entity
   User toEntity() {
     return User(
@@ -73,4 +73,3 @@ class UserModel extends User {
     );
   }
 }
-

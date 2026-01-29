@@ -125,7 +125,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final cachedUser = await localDataSource.getCachedUser();
       if (cachedUser != null) {
         if (await networkInfo.isConnected) {
-          _refreshUserInBackground();
+          unawaited(_refreshUserInBackground());
         }
         return Right(cachedUser);
       }

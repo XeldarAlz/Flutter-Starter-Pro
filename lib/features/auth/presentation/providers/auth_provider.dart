@@ -84,7 +84,7 @@ class AuthNotifier extends _$AuthNotifier {
     required String email,
     required String password,
   }) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(status: AuthStatus.loading);
 
     try {
       final signInUseCase = ref.read(signInUseCaseProvider);
@@ -123,7 +123,7 @@ class AuthNotifier extends _$AuthNotifier {
     required String email,
     required String password,
   }) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(status: AuthStatus.loading);
 
     try {
       final signUpUseCase = ref.read(signUpUseCaseProvider);
@@ -185,7 +185,7 @@ class AuthNotifier extends _$AuthNotifier {
 
   /// Request password reset.
   Future<bool> requestPasswordReset(String email) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(status: AuthStatus.loading);
 
     try {
       final forgotPasswordUseCase = ref.read(forgotPasswordUseCaseProvider);
@@ -221,7 +221,7 @@ class AuthNotifier extends _$AuthNotifier {
     String? phoneNumber,
     String? avatarUrl,
   }) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(status: AuthStatus.loading);
 
     try {
       final updateUserUseCase = ref.read(updateUserUseCaseProvider);
@@ -260,7 +260,7 @@ class AuthNotifier extends _$AuthNotifier {
 
   /// Clear error message.
   void clearError() {
-    state = state.copyWith(errorMessage: null);
+    state = state.copyWith();
   }
 }
 

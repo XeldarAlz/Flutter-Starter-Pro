@@ -1,3 +1,5 @@
+import 'package:flutter_starter_pro/core/errors/exceptions.dart'
+    show ServerException;
 import 'package:flutter_starter_pro/features/auth/data/models/token_model.dart';
 import 'package:flutter_starter_pro/features/auth/data/models/user_model.dart';
 

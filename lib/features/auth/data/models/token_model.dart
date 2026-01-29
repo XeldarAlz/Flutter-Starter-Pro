@@ -7,11 +7,6 @@ class TokenModel {
     this.expiresIn,
   });
 
-  final String accessToken;
-  final String refreshToken;
-  final String tokenType;
-  final int? expiresIn;
-
   /// Create TokenModel from JSON
   factory TokenModel.fromJson(Map<String, dynamic> json) {
     return TokenModel(
@@ -21,6 +16,11 @@ class TokenModel {
       expiresIn: json['expires_in'] as int?,
     );
   }
+
+  final String accessToken;
+  final String refreshToken;
+  final String tokenType;
+  final int? expiresIn;
 
   /// Convert to JSON
   Map<String, dynamic> toJson() {
@@ -46,9 +46,6 @@ class AuthResponse {
     required this.user,
   });
 
-  final TokenModel tokens;
-  final Map<String, dynamic> user;
-
   /// Create AuthResponse from JSON
   factory AuthResponse.fromJson(Map<String, dynamic> json) {
     return AuthResponse(
@@ -56,5 +53,7 @@ class AuthResponse {
       user: json['user'] as Map<String, dynamic>,
     );
   }
-}
 
+  final TokenModel tokens;
+  final Map<String, dynamic> user;
+}
