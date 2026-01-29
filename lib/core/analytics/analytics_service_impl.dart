@@ -10,9 +10,7 @@ class NoOpAnalyticsService implements AnalyticsService {
   const NoOpAnalyticsService();
 
   @override
-  Future<void> initialize() async {
-    // No-op
-  }
+  Future<void> initialize() async {}
 
   @override
   Future<void> logEvent(
@@ -90,7 +88,7 @@ class NoOpAnalyticsService implements AnalyticsService {
   }
 
   @override
-  Future<void> setAnalyticsCollectionEnabled(bool enabled) async {
+  Future<void> setAnalyticsCollectionEnabled({required bool enabled}) async {
     AppLogger.debug('Analytics Collection Enabled: $enabled');
   }
 
@@ -115,16 +113,9 @@ class FirebaseAnalyticsService implements AnalyticsService {
 
   final AppEnvironment environment;
 
-  // TODO: Uncomment when firebase_analytics is added
-  // late final FirebaseAnalytics _analytics;
-
   @override
   Future<void> initialize() async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // _analytics = FirebaseAnalytics.instance;
-    // await _analytics.setAnalyticsCollectionEnabled(true);
 
     AppLogger.info('Firebase Analytics initialized');
   }
@@ -135,9 +126,6 @@ class FirebaseAnalyticsService implements AnalyticsService {
     Map<String, dynamic>? parameters,
   }) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logEvent(name: name, parameters: parameters);
 
     if (environment.enableLogging) {
       AppLogger.debug('Analytics Event: $name');
@@ -150,60 +138,36 @@ class FirebaseAnalyticsService implements AnalyticsService {
     String? screenClass,
   }) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logScreenView(
-    //   screenName: screenName,
-    //   screenClass: screenClass,
-    // );
   }
 
   @override
   Future<void> setUserId(String? userId) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.setUserId(id: userId);
   }
 
   @override
   Future<void> setUserProperty(String name, String? value) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.setUserProperty(name: name, value: value);
   }
 
   @override
   Future<void> logLogin({String? loginMethod}) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logLogin(loginMethod: loginMethod);
   }
 
   @override
   Future<void> logSignUp({String? signUpMethod}) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logSignUp(signUpMethod: signUpMethod);
   }
 
   @override
   Future<void> logAppOpen() async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logAppOpen();
   }
 
   @override
   Future<void> logSearch(String searchTerm) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logSearch(searchTerm: searchTerm);
   }
 
   @override
@@ -213,13 +177,6 @@ class FirebaseAnalyticsService implements AnalyticsService {
     String? method,
   }) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logShare(
-    //   contentType: contentType,
-    //   itemId: itemId,
-    //   method: method,
-    // );
   }
 
   @override
@@ -230,47 +187,21 @@ class FirebaseAnalyticsService implements AnalyticsService {
     List<AnalyticsItem>? items,
   }) async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logPurchase(
-    //   currency: currency,
-    //   value: value,
-    //   transactionId: transactionId,
-    //   items: items?.map((i) => AnalyticsEventItem(
-    //     itemId: i.itemId,
-    //     itemName: i.itemName,
-    //     itemCategory: i.itemCategory,
-    //     price: i.price,
-    //     quantity: i.quantity,
-    //   )).toList(),
-    // );
   }
 
   @override
   Future<void> logTutorialBegin() async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logTutorialBegin();
   }
 
   @override
   Future<void> logTutorialComplete() async {
     if (!environment.enableAnalytics) return;
-
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.logTutorialComplete();
   }
 
   @override
-  Future<void> setAnalyticsCollectionEnabled(bool enabled) async {
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.setAnalyticsCollectionEnabled(enabled);
-  }
+  Future<void> setAnalyticsCollectionEnabled({required bool enabled}) async {}
 
   @override
-  Future<void> resetAnalyticsData() async {
-    // TODO: Uncomment when firebase_analytics is added
-    // await _analytics.resetAnalyticsData();
-  }
+  Future<void> resetAnalyticsData() async {}
 }

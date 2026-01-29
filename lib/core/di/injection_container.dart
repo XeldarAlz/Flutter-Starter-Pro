@@ -23,10 +23,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'injection_container.g.dart';
 
-// =============================================================================
-// Core Services
-// =============================================================================
-
 /// Provider for [Connectivity].
 @riverpod
 Connectivity connectivity(Ref ref) {
@@ -61,10 +57,6 @@ LocalStorage localStorage(Ref ref) {
   return LocalStorage(ref.watch(sharedPreferencesProvider));
 }
 
-// =============================================================================
-// Monitoring & Analytics
-// =============================================================================
-
 /// Provider for [CrashReporter].
 ///
 /// Returns [SentryCrashReporter] in production/staging when crash reporting
@@ -91,10 +83,6 @@ AnalyticsService analyticsService(Ref ref) {
   return const NoOpAnalyticsService();
 }
 
-// =============================================================================
-// Sync Manager
-// =============================================================================
-
 /// Provider for [SyncManager].
 ///
 /// Manages offline operations and syncs them when connectivity is restored.
@@ -104,20 +92,12 @@ SyncManager syncManager(Ref ref) {
     apiClient: ref.watch(apiClientProvider),
     networkInfo: ref.watch(networkInfoProvider),
     localStorage: ref.watch(localStorageProvider),
-  );
-  
-  // Initialize the manager
-  manager.initialize();
-  
-  // Dispose when provider is disposed
+  )..initialize();
+
   ref.onDispose(manager.dispose);
-  
+
   return manager;
 }
-
-// =============================================================================
-// Network
-// =============================================================================
 
 /// Provider for [ApiClient].
 /// Uses environment configuration for base URL and timeouts.
@@ -132,10 +112,6 @@ ApiClient apiClient(Ref ref) {
     enableLogging: env.enableLogging,
   );
 }
-
-// =============================================================================
-// Auth Feature
-// =============================================================================
 
 /// Provider for [AuthRemoteDataSource].
 @riverpod

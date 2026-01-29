@@ -1,10 +1,4 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'injection_container.dart';
-
-// **************************************************************************
-// RiverpodGenerator
-// **************************************************************************
 
 String _$connectivityHash() => r'6d67af0ea4110f6ee0246dd332f90f8901380eda';
 
@@ -329,5 +323,3 @@ final updateUserUseCaseProvider =
 );
 
 typedef UpdateUserUseCaseRef = AutoDisposeProviderRef<UpdateUserUseCase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

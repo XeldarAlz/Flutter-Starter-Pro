@@ -11,9 +11,7 @@ class NoOpCrashReporter implements CrashReporter {
   const NoOpCrashReporter();
 
   @override
-  Future<void> initialize() async {
-    // No-op
-  }
+  Future<void> initialize() async {}
 
   @override
   Future<void> captureException(
@@ -45,33 +43,23 @@ class NoOpCrashReporter implements CrashReporter {
     String? id,
     String? email,
     String? username,
-  }) async {
-    // No-op
-  }
+  }) async {}
 
   @override
-  Future<void> clearUser() async {
-    // No-op
-  }
+  Future<void> clearUser() async {}
 
   @override
   Future<void> addBreadcrumb(
     String message, {
     String? category,
     Map<String, dynamic>? data,
-  }) async {
-    // No-op
-  }
+  }) async {}
 
   @override
-  Future<void> setTag(String key, String value) async {
-    // No-op
-  }
+  Future<void> setTag(String key, String value) async {}
 
   @override
-  Future<void> setExtra(String key, dynamic value) async {
-    // No-op
-  }
+  Future<void> setExtra(String key, dynamic value) async {}
 }
 
 /// Sentry crash reporter implementation.
@@ -93,18 +81,6 @@ class SentryCrashReporter implements CrashReporter {
     if (!environment.enableCrashReporting) return;
     if (environment.sentryDsn.isEmpty) return;
 
-    // TODO: Uncomment when sentry_flutter is added to dependencies
-    // await SentryFlutter.init(
-    //   (options) {
-    //     options.dsn = environment.sentryDsn;
-    //     options.environment = environment.name;
-    //     options.tracesSampleRate = environment.isProduction ? 0.2 : 1.0;
-    //     options.attachScreenshot = true;
-    //     options.attachViewHierarchy = true;
-    //     options.enableAutoPerformanceTracing = true;
-    //   },
-    // );
-
     AppLogger.info('Sentry initialized for ${environment.name}');
   }
 
@@ -115,19 +91,6 @@ class SentryCrashReporter implements CrashReporter {
     Map<String, dynamic>? extras,
   }) async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // await Sentry.captureException(
-    //   exception,
-    //   stackTrace: stackTrace,
-    //   withScope: (scope) {
-    //     if (extras != null) {
-    //       extras.forEach((key, value) {
-    //         scope.setExtra(key, value);
-    //       });
-    //     }
-    //   },
-    // );
 
     if (environment.enableLogging) {
       AppLogger.error(
@@ -145,12 +108,6 @@ class SentryCrashReporter implements CrashReporter {
   }) async {
     if (!environment.enableCrashReporting) return;
 
-    // TODO: Uncomment when sentry_flutter is added
-    // await Sentry.captureMessage(
-    //   message,
-    //   level: _mapSeverityLevel(level),
-    // );
-
     if (environment.enableLogging) {
       AppLogger.info('Message reported to Sentry: $message');
     }
@@ -163,23 +120,11 @@ class SentryCrashReporter implements CrashReporter {
     String? username,
   }) async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // Sentry.configureScope((scope) {
-    //   scope.setUser(SentryUser(
-    //     id: id,
-    //     email: email,
-    //     username: username,
-    //   ));
-    // });
   }
 
   @override
   Future<void> clearUser() async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // Sentry.configureScope((scope) => scope.setUser(null));
   }
 
   @override
@@ -189,47 +134,15 @@ class SentryCrashReporter implements CrashReporter {
     Map<String, dynamic>? data,
   }) async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // await Sentry.addBreadcrumb(Breadcrumb(
-    //   message: message,
-    //   category: category,
-    //   data: data,
-    //   timestamp: DateTime.now(),
-    // ));
   }
 
   @override
   Future<void> setTag(String key, String value) async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // Sentry.configureScope((scope) => scope.setTag(key, value));
   }
 
   @override
   Future<void> setExtra(String key, dynamic value) async {
     if (!environment.enableCrashReporting) return;
-
-    // TODO: Uncomment when sentry_flutter is added
-    // Sentry.configureScope((scope) => scope.setExtra(key, value));
   }
-
-  // TODO: Uncomment when sentry_flutter is added
-  // SentryLevel _mapSeverityLevel(CrashSeverityLevel? level) {
-  //   switch (level) {
-  //     case CrashSeverityLevel.debug:
-  //       return SentryLevel.debug;
-  //     case CrashSeverityLevel.info:
-  //       return SentryLevel.info;
-  //     case CrashSeverityLevel.warning:
-  //       return SentryLevel.warning;
-  //     case CrashSeverityLevel.error:
-  //       return SentryLevel.error;
-  //     case CrashSeverityLevel.fatal:
-  //       return SentryLevel.fatal;
-  //     case null:
-  //       return SentryLevel.info;
-  //   }
-  // }
 }

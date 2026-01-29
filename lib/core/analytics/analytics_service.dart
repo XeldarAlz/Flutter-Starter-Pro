@@ -86,7 +86,7 @@ abstract class AnalyticsService {
   Future<void> logTutorialComplete();
 
   /// Enable or disable analytics collection.
-  Future<void> setAnalyticsCollectionEnabled(bool enabled);
+  Future<void> setAnalyticsCollectionEnabled({required bool enabled});
 
   /// Reset analytics data.
   Future<void> resetAnalyticsData();
