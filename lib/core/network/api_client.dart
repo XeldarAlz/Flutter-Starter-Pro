@@ -180,7 +180,6 @@ class ApiClient {
         );
 
       case DioExceptionType.unknown:
-      default:
         return ServerException(
           message: error.message ?? 'Unknown error occurred',
           code: 'UNKNOWN',
@@ -245,4 +244,3 @@ class ApiClient {
     }
   }
 }
-

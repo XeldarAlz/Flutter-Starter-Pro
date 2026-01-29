@@ -33,12 +33,10 @@ class AuthGuard {
     final isLoggedIn = await isAuthenticated();
     final onboardingDone = isOnboardingCompleted();
 
-    // If not onboarded and trying to access protected route
     if (!onboardingDone && location != Routes.onboarding) {
       return Routes.onboarding;
     }
 
-    // Auth routes - redirect to home if already logged in
     final authRoutes = [
       Routes.login,
       Routes.register,
@@ -49,7 +47,6 @@ class AuthGuard {
       return Routes.home;
     }
 
-    // Protected routes - redirect to login if not logged in
     final protectedRoutes = [
       Routes.home,
       Routes.dashboard,
@@ -65,4 +62,3 @@ class AuthGuard {
     return null; // No redirect needed
   }
 }
-

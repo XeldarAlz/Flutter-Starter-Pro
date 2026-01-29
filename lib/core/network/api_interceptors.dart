@@ -42,7 +42,10 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     AppLogger.info(
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );
@@ -95,7 +98,6 @@ class TokenRefreshInterceptor extends Interceptor {
               await _secureStorage.saveRefreshToken(newRefreshToken);
             }
 
-            // Retry the original request
             final opts = err.requestOptions;
             opts.headers[ApiConstants.authorizationHeader] =
                 '${ApiConstants.bearerPrefix} $newAccessToken';
@@ -105,7 +107,6 @@ class TokenRefreshInterceptor extends Interceptor {
           }
         }
 
-        // If refresh failed, clear tokens and reject
         await _secureStorage.clearTokens();
         return handler.reject(err);
       } catch (e) {
@@ -155,7 +156,7 @@ class RetryInterceptor extends Interceptor {
         final response = await dio.fetch<dynamic>(err.requestOptions);
         return handler.resolve(response);
       } catch (e) {
-        // Continue to next handler if retry fails
+        // Retry failed, propagate original error
       }
     }
 
@@ -169,4 +170,3 @@ class RetryInterceptor extends Interceptor {
         (err.response?.statusCode != null && err.response!.statusCode! >= 500);
   }
 }
-

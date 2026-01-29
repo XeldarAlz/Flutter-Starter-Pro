@@ -7,14 +7,12 @@ class LocalStorage {
 
   final SharedPreferences _prefs;
 
-  // First Launch
   bool get isFirstLaunch => _prefs.getBool(StorageKeys.isFirstLaunch) ?? true;
 
   Future<void> setFirstLaunchComplete() async {
     await _prefs.setBool(StorageKeys.isFirstLaunch, false);
   }
 
-  // Onboarding
   bool get isOnboardingCompleted =>
       _prefs.getBool(StorageKeys.isOnboardingCompleted) ?? false;
 
@@ -22,28 +20,24 @@ class LocalStorage {
     await _prefs.setBool(StorageKeys.isOnboardingCompleted, true);
   }
 
-  // Theme Mode
   String? get themeMode => _prefs.getString(StorageKeys.themeMode);
 
   Future<void> setThemeMode(String mode) async {
     await _prefs.setString(StorageKeys.themeMode, mode);
   }
 
-  // Language
   String? get languageCode => _prefs.getString(StorageKeys.languageCode);
 
   Future<void> setLanguageCode(String code) async {
     await _prefs.setString(StorageKeys.languageCode, code);
   }
 
-  // Remember Me
   bool get rememberMe => _prefs.getBool(StorageKeys.rememberMe) ?? false;
 
   Future<void> setRememberMe({required bool value}) async {
     await _prefs.setBool(StorageKeys.rememberMe, value);
   }
 
-  // User Email (for remember me feature)
   String? get userEmail => _prefs.getString(StorageKeys.userEmail);
 
   Future<void> setUserEmail(String email) async {
@@ -54,7 +48,6 @@ class LocalStorage {
     await _prefs.remove(StorageKeys.userEmail);
   }
 
-  // Last Sync Time
   DateTime? get lastSyncTime {
     final timestamp = _prefs.getInt(StorageKeys.lastSyncTime);
     return timestamp != null
@@ -66,7 +59,6 @@ class LocalStorage {
     await _prefs.setInt(StorageKeys.lastSyncTime, time.millisecondsSinceEpoch);
   }
 
-  // Generic methods
   Future<bool> setString(String key, String value) async {
     return _prefs.setString(key, value);
   }
@@ -109,4 +101,3 @@ class LocalStorage {
 
   Set<String> getKeys() => _prefs.getKeys();
 }
-

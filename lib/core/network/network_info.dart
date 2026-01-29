@@ -18,14 +18,14 @@ class NetworkInfoImpl implements NetworkInfo {
   @override
   Future<bool> get isConnected async {
     final result = await _connectivity.checkConnectivity();
-    return !result.contains(ConnectivityResult.none);
+    // Check if there is any valid connection type
+    return result.any((element) => element != ConnectivityResult.none);
   }
 
   @override
   Stream<bool> get onConnectivityChanged {
     return _connectivity.onConnectivityChanged.map(
-      (results) => !results.contains(ConnectivityResult.none),
+      (results) => results.any((element) => element != ConnectivityResult.none),
     );
   }
 }
-

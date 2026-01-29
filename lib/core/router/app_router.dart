@@ -28,13 +28,10 @@ GoRouter appRouter(Ref ref) {
     redirect: (context, state) async {
       final location = state.matchedLocation;
 
-      // Check if onboarding is completed
       final onboardingCompleted = localStorage?.isOnboardingCompleted ?? false;
 
-      // Check if user is authenticated
       final isLoggedIn = await secureStorage.hasValidToken();
 
-      // Splash screen logic
       if (location == Routes.splash) {
         if (!onboardingCompleted) {
           return Routes.onboarding;
@@ -45,7 +42,6 @@ GoRouter appRouter(Ref ref) {
         return Routes.home;
       }
 
-      // Onboarding route protection
       if (location == Routes.onboarding) {
         if (onboardingCompleted) {
           return isLoggedIn ? Routes.home : Routes.login;
@@ -53,7 +49,6 @@ GoRouter appRouter(Ref ref) {
         return null;
       }
 
-      // Auth routes - redirect to home if already logged in
       final authRoutes = [
         Routes.login,
         Routes.register,
@@ -64,7 +59,6 @@ GoRouter appRouter(Ref ref) {
         return Routes.home;
       }
 
-      // Protected routes - redirect to login if not logged in
       final protectedRoutes = [
         Routes.home,
         Routes.profile,
@@ -72,28 +66,23 @@ GoRouter appRouter(Ref ref) {
         '/analytics',
       ];
 
-      if (!isLoggedIn && protectedRoutes.any((r) => location.startsWith(r))) {
+      if (!isLoggedIn && protectedRoutes.any(location.startsWith)) {
         return Routes.login;
       }
 
       return null;
     },
     routes: [
-      // Splash / Initial
       GoRoute(
         path: Routes.splash,
         name: RouteNames.splash,
         builder: (context, state) => const _SplashScreen(),
       ),
-
-      // Onboarding
       GoRoute(
         path: Routes.onboarding,
         name: RouteNames.onboarding,
         builder: (context, state) => const OnboardingScreen(),
       ),
-
-      // Auth Routes
       GoRoute(
         path: Routes.login,
         name: RouteNames.login,
@@ -109,15 +98,11 @@ GoRouter appRouter(Ref ref) {
         name: RouteNames.forgotPassword,
         builder: (context, state) => const ForgotPasswordScreen(),
       ),
-
-      // Main App Routes - with bottom navigation shell
       GoRoute(
         path: Routes.home,
         name: RouteNames.home,
         builder: (context, state) => const MainShell(),
       ),
-
-      // Standalone routes (pushed on top of shell)
       GoRoute(
         path: Routes.profile,
         name: RouteNames.profile,
@@ -128,8 +113,6 @@ GoRouter appRouter(Ref ref) {
         name: 'analytics',
         builder: (context, state) => const AnalyticsScreen(),
       ),
-
-      // Settings Routes
       GoRoute(
         path: Routes.settings,
         name: RouteNames.settings,
@@ -208,7 +191,8 @@ class _ErrorScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              error?.toString() ?? 'The page you are looking for does not exist.',
+              error?.toString() ??
+                  'The page you are looking for does not exist.',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -223,4 +207,3 @@ class _ErrorScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,34 +1,27 @@
 /// Route path constants
 abstract class Routes {
-  // Root
   static const String splash = '/';
 
-  // Onboarding
   static const String onboarding = '/onboarding';
 
-  // Auth
   static const String login = '/login';
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
   static const String verifyEmail = '/verify-email';
 
-  // Main App
   static const String home = '/home';
   static const String dashboard = '/dashboard';
 
-  // Profile
   static const String profile = '/profile';
   static const String editProfile = '/profile/edit';
 
-  // Settings
   static const String settings = '/settings';
   static const String settingsAppearance = '/settings/appearance';
   static const String settingsNotifications = '/settings/notifications';
   static const String settingsPrivacy = '/settings/privacy';
   static const String settingsAbout = '/settings/about';
 
-  // Other
   static const String notifications = '/notifications';
   static const String search = '/search';
 }
@@ -54,4 +47,3 @@ abstract class RouteNames {
   static const String notifications = 'notifications';
   static const String search = 'search';
 }
-

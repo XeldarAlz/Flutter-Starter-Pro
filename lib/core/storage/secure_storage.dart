@@ -16,7 +16,6 @@ class SecureStorage {
 
   final FlutterSecureStorage _storage;
 
-  // Access Token
   Future<void> saveAccessToken(String token) async {
     await _storage.write(key: StorageKeys.accessToken, value: token);
   }
@@ -29,7 +28,6 @@ class SecureStorage {
     await _storage.delete(key: StorageKeys.accessToken);
   }
 
-  // Refresh Token
   Future<void> saveRefreshToken(String token) async {
     await _storage.write(key: StorageKeys.refreshToken, value: token);
   }
@@ -42,7 +40,6 @@ class SecureStorage {
     await _storage.delete(key: StorageKeys.refreshToken);
   }
 
-  // User ID
   Future<void> saveUserId(String userId) async {
     await _storage.write(key: StorageKeys.userId, value: userId);
   }
@@ -55,7 +52,6 @@ class SecureStorage {
     await _storage.delete(key: StorageKeys.userId);
   }
 
-  // Token Management
   Future<void> saveTokens({
     required String accessToken,
     required String refreshToken,
@@ -81,7 +77,6 @@ class SecureStorage {
     return token != null && token.isNotEmpty;
   }
 
-  // Generic methods
   Future<void> write(String key, String value) async {
     await _storage.write(key: key, value: value);
   }
@@ -106,4 +101,3 @@ class SecureStorage {
     return _storage.containsKey(key: key);
   }
 }
-
