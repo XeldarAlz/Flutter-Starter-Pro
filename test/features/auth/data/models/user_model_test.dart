@@ -27,7 +27,7 @@ void main() {
         expect(user.avatarUrl, 'https://example.com/avatar.png');
         expect(user.phoneNumber, '+1234567890');
         expect(user.isEmailVerified, true);
-        expect(user.createdAt, DateTime.utc(2024, 1, 1));
+        expect(user.createdAt, DateTime.utc(2024));
         expect(user.updatedAt, DateTime.utc(2024, 1, 2));
       });
 
@@ -94,7 +94,7 @@ void main() {
         final user = UserModel(
           id: 'user-123',
           email: 'test@example.com',
-          createdAt: DateTime.utc(2024, 1, 1),
+          createdAt: DateTime.utc(2024),
           updatedAt: DateTime.utc(2024, 1, 2),
         );
 
@@ -195,7 +195,8 @@ void main() {
         expect(resultJson['name'], originalJson['name']);
         expect(resultJson['avatar_url'], originalJson['avatar_url']);
         expect(resultJson['phone_number'], originalJson['phone_number']);
-        expect(resultJson['is_email_verified'], originalJson['is_email_verified']);
+        expect(
+            resultJson['is_email_verified'], originalJson['is_email_verified']);
       });
 
       test('fromEntity and toEntity should be reversible', () {

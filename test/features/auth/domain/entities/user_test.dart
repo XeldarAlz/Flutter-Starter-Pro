@@ -29,7 +29,6 @@ void main() {
         const user = User(
           id: 'test-id',
           email: 'test@example.com',
-          name: null,
         );
         expect(user.displayName, 'test@example.com');
       });
@@ -58,7 +57,6 @@ void main() {
         const user = User(
           id: 'test-id',
           email: 'test@example.com',
-          name: null,
         );
         expect(user.initials, 'T');
       });
@@ -97,7 +95,6 @@ void main() {
         const user = User(
           id: 'test-id',
           email: 'test@example.com',
-          name: null,
           isEmailVerified: true,
         );
         expect(user.hasCompleteProfile, false);
@@ -118,7 +115,6 @@ void main() {
           id: 'test-id',
           email: 'test@example.com',
           name: 'Test User',
-          isEmailVerified: false,
         );
         expect(user.hasCompleteProfile, false);
       });

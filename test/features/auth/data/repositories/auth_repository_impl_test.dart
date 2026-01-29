@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_starter_pro/core/errors/exceptions.dart';
 import 'package:flutter_starter_pro/core/errors/failures.dart';
-import 'package:flutter_starter_pro/features/auth/data/models/token_model.dart';
-import 'package:flutter_starter_pro/features/auth/data/models/user_model.dart';
 import 'package:flutter_starter_pro/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -48,8 +46,7 @@ void main() {
       ).thenAnswer((_) async => AuthFixtures.testAuthResponse);
       when(() => mockLocalDataSource.saveTokens(any()))
           .thenAnswer((_) async {});
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Act
       final result = await repository.signIn(
@@ -173,7 +170,7 @@ void main() {
         const ValidationException(
           message: 'Validation failed',
           errors: {
-            'email': ['Invalid email format']
+            'email': ['Invalid email format'],
           },
         ),
       );
@@ -209,8 +206,7 @@ void main() {
       ).thenAnswer((_) async => AuthFixtures.testAuthResponse);
       when(() => mockLocalDataSource.saveTokens(any()))
           .thenAnswer((_) async {});
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Act
       final result = await repository.signUp(
@@ -333,8 +329,7 @@ void main() {
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(() => mockRemoteDataSource.getCurrentUser())
           .thenAnswer((_) async => AuthFixtures.testUserModel);
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Act
       final result = await repository.getCurrentUser();
@@ -395,7 +390,8 @@ void main() {
     test('should return unit when forgot password is successful', () async {
       // Arrange
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockRemoteDataSource.forgotPassword(email: any(named: 'email')))
+      when(() =>
+              mockRemoteDataSource.forgotPassword(email: any(named: 'email')))
           .thenAnswer((_) async {});
 
       // Act
@@ -405,7 +401,8 @@ void main() {
       // Assert
       expect(result, isA<Right>());
       verify(
-        () => mockRemoteDataSource.forgotPassword(email: AuthFixtures.testEmail),
+        () =>
+            mockRemoteDataSource.forgotPassword(email: AuthFixtures.testEmail),
       ).called(1);
     });
 
@@ -437,8 +434,7 @@ void main() {
           avatarUrl: any(named: 'avatarUrl'),
         ),
       ).thenAnswer((_) async => AuthFixtures.testUserModel);
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Act
       final result = await repository.updateUser(name: 'New Name');
@@ -506,8 +502,7 @@ void main() {
       ).thenAnswer((_) async => AuthFixtures.testAuthResponse);
       when(() => mockLocalDataSource.saveTokens(any()))
           .thenAnswer((_) async {});
-      when(() => mockLocalDataSource.cacheUser(any()))
-          .thenAnswer((_) async {});
+      when(() => mockLocalDataSource.cacheUser(any())).thenAnswer((_) async {});
 
       // Collect stream emissions
       final emissions = <dynamic>[];

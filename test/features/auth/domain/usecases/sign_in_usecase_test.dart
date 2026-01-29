@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_starter_pro/core/errors/failures.dart';
+import 'package:flutter_starter_pro/features/auth/domain/entities/user.dart';
 import 'package:flutter_starter_pro/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -24,7 +25,8 @@ void main() {
           email: any(named: 'email'),
           password: any(named: 'password'),
         ),
-      ).thenAnswer((_) async => const Right(AuthFixtures.testUser));
+      ).thenAnswer(
+          (_) async => const Right<Failure, User>(AuthFixtures.testUser));
 
       // Act
       final result = await useCase(
@@ -35,7 +37,7 @@ void main() {
       );
 
       // Assert
-      expect(result, const Right(AuthFixtures.testUser));
+      expect(result, const Right<Failure, User>(AuthFixtures.testUser));
       verify(
         () => mockRepository.signIn(
           email: AuthFixtures.testEmail,
@@ -53,7 +55,7 @@ void main() {
           email: any(named: 'email'),
           password: any(named: 'password'),
         ),
-      ).thenAnswer((_) async => const Left(failure));
+      ).thenAnswer((_) async => const Left<Failure, User>(failure));
 
       // Act
       final result = await useCase(
@@ -64,7 +66,7 @@ void main() {
       );
 
       // Assert
-      expect(result, const Left(failure));
+      expect(result, const Left<Failure, User>(failure));
     });
 
     test('should return NetworkFailure when offline', () async {
@@ -75,7 +77,7 @@ void main() {
           email: any(named: 'email'),
           password: any(named: 'password'),
         ),
-      ).thenAnswer((_) async => const Left(failure));
+      ).thenAnswer((_) async => const Left<Failure, User>(failure));
 
       // Act
       final result = await useCase(
@@ -86,7 +88,7 @@ void main() {
       );
 
       // Assert
-      expect(result, const Left(failure));
+      expect(result, const Left<Failure, User>(failure));
     });
   });
 

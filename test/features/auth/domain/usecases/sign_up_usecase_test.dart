@@ -53,7 +53,7 @@ void main() {
       const failure = ValidationFailure(
         message: 'Email already in use',
         errors: {
-          'email': ['This email is already registered']
+          'email': ['This email is already registered'],
         },
       );
       when(
@@ -110,7 +110,8 @@ void main() {
 
     test('should return ServerFailure on server error', () async {
       // Arrange
-      const failure = ServerFailure(message: 'Internal server error', statusCode: 500);
+      const failure =
+          ServerFailure(message: 'Internal server error', statusCode: 500);
       when(
         () => mockRepository.signUp(
           email: any(named: 'email'),
@@ -158,7 +159,11 @@ void main() {
 
       expect(
         params.props,
-        [AuthFixtures.testEmail, AuthFixtures.testPassword, AuthFixtures.testName],
+        [
+          AuthFixtures.testEmail,
+          AuthFixtures.testPassword,
+          AuthFixtures.testName
+        ],
       );
     });
   });

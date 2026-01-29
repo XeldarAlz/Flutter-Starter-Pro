@@ -32,7 +32,6 @@ class AuthFixtures {
   static const testTokenModel = TokenModel(
     accessToken: 'test-access-token',
     refreshToken: 'test-refresh-token',
-    tokenType: 'Bearer',
     expiresIn: 3600,
   );
 
