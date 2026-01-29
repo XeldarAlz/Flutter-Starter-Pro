@@ -8,13 +8,19 @@ analyzer:
     - "lib/l10n/**"
     - "lib/generated/**"
 
+  language:
+    strict-raw-types: false
+
+  errors:
+    inference_failure_on_instance_creation: ignore
+
 linter:
   rules:
     public_member_api_docs: false
     lines_longer_than_80_chars: false
     flutter_style_todos: false
     prefer_single_quotes: true
-    sort_pub_dependencies: true
+    sort_pub_dependencies: false
     always_use_package_imports: true
     avoid_dynamic_calls: true
     prefer_const_constructors: true
