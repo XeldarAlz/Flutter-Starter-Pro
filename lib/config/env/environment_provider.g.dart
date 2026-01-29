@@ -1,10 +1,4 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'environment_provider.dart';
-
-// **************************************************************************
-// RiverpodGenerator
-// **************************************************************************
 
 String _$environmentHash() => r'5ff2bd9e244a4dc2980fbe6577b9b953dcde83be';
 
@@ -37,5 +31,3 @@ final environmentProvider = AutoDisposeProvider<AppEnvironment>.internal(
 );
 
 typedef EnvironmentRef = AutoDisposeProviderRef<AppEnvironment>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

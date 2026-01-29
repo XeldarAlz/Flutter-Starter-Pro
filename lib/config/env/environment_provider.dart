@@ -23,7 +23,5 @@ part 'environment_provider.g.dart';
 /// ```
 @riverpod
 AppEnvironment environment(Ref ref) {
-  // Default to development environment
-  // This should be overridden in main_*.dart files
   return const DevEnvironment();
 }

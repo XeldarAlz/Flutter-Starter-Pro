@@ -34,8 +34,6 @@ abstract class AppEnvironment {
   /// Receive timeout for API requests
   Duration get receiveTimeout;
 
-  // Feature flags
-
   /// Whether biometric authentication is enabled
   bool get enableBiometricAuth;
 

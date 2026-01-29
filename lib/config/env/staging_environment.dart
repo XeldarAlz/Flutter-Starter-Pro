@@ -26,7 +26,6 @@ class StagingEnvironment implements AppEnvironment {
   @override
   String get sentryDsn => const String.fromEnvironment(
         'SENTRY_DSN_STAGING',
-        defaultValue: '',
       );
 
   @override
@@ -35,7 +34,6 @@ class StagingEnvironment implements AppEnvironment {
   @override
   Duration get receiveTimeout => const Duration(seconds: 30);
 
-  // Feature flags
   @override
   bool get enableBiometricAuth => true;
 

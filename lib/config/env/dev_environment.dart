@@ -31,7 +31,6 @@ class DevEnvironment implements AppEnvironment {
   @override
   Duration get receiveTimeout => const Duration(seconds: 60);
 
-  // Feature flags
   @override
   bool get enableBiometricAuth => true;
 
