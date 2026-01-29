@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_starter_pro/core/router/routes.dart';
 import 'package:flutter_starter_pro/core/storage/local_storage.dart';
 import 'package:flutter_starter_pro/core/storage/secure_storage.dart';
+import 'package:flutter_starter_pro/features/analytics/presentation/screens/analytics_screen.dart';
 import 'package:flutter_starter_pro/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:flutter_starter_pro/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter_starter_pro/features/auth/presentation/screens/register_screen.dart';
-import 'package:flutter_starter_pro/features/home/presentation/screens/home_screen.dart';
+import 'package:flutter_starter_pro/features/main/presentation/screens/main_shell.dart';
 import 'package:flutter_starter_pro/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:flutter_starter_pro/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter_starter_pro/features/settings/presentation/screens/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -67,6 +69,7 @@ GoRouter appRouter(Ref ref) {
         Routes.home,
         Routes.profile,
         Routes.settings,
+        '/analytics',
       ];
 
       if (!isLoggedIn && protectedRoutes.any((r) => location.startsWith(r))) {
@@ -107,11 +110,23 @@ GoRouter appRouter(Ref ref) {
         builder: (context, state) => const ForgotPasswordScreen(),
       ),
 
-      // Main App Routes
+      // Main App Routes - with bottom navigation shell
       GoRoute(
         path: Routes.home,
         name: RouteNames.home,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const MainShell(),
+      ),
+
+      // Standalone routes (pushed on top of shell)
+      GoRoute(
+        path: Routes.profile,
+        name: RouteNames.profile,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: '/analytics',
+        name: 'analytics',
+        builder: (context, state) => const AnalyticsScreen(),
       ),
 
       // Settings Routes

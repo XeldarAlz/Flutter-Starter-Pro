@@ -89,26 +89,6 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Iconsax.home),
-            selectedIcon: Icon(Iconsax.home_15),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Iconsax.chart_2),
-            selectedIcon: Icon(Iconsax.chart_21),
-            label: 'Analytics',
-          ),
-          NavigationDestination(
-            icon: Icon(Iconsax.user),
-            selectedIcon: Icon(Iconsax.user5),
-            label: 'Profile',
-          ),
-        ],
-      ),
     );
   }
 
