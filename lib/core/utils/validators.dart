@@ -33,18 +33,15 @@ abstract class Validators {
       return 'Password must be less than ${AppConstants.maxPasswordLength} characters';
     }
 
-    // Check for at least one uppercase letter
-    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+    if (!RegExp('[A-Z]').hasMatch(value)) {
       return 'Password must contain at least one uppercase letter';
     }
 
-    // Check for at least one lowercase letter
-    if (!RegExp(r'[a-z]').hasMatch(value)) {
+    if (!RegExp('[a-z]').hasMatch(value)) {
       return 'Password must contain at least one lowercase letter';
     }
 
-    // Check for at least one digit
-    if (!RegExp(r'[0-9]').hasMatch(value)) {
+    if (!RegExp('[0-9]').hasMatch(value)) {
       return 'Password must contain at least one number';
     }
 
@@ -100,7 +97,6 @@ abstract class Validators {
       return 'Phone number is required';
     }
 
-    // Remove all non-digit characters for validation
     final digits = value.replaceAll(RegExp(r'\D'), '');
 
     if (digits.length < 10) {
@@ -207,7 +203,6 @@ abstract class Validators {
       return 'Please enter a valid card number';
     }
 
-    // Luhn algorithm
     var sum = 0;
     var isEven = false;
 
@@ -232,4 +227,3 @@ abstract class Validators {
     return null;
   }
 }
-

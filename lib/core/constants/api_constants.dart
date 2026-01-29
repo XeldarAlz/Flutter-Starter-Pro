@@ -13,7 +13,6 @@ abstract class ApiConstants {
   /// Send timeout duration
   static const Duration sendTimeout = Duration(seconds: 30);
 
-  // Auth endpoints
   static const String login = '/auth/login';
   static const String register = '/auth/register';
   static const String logout = '/auth/logout';
@@ -22,17 +21,14 @@ abstract class ApiConstants {
   static const String resetPassword = '/auth/reset-password';
   static const String verifyEmail = '/auth/verify-email';
 
-  // User endpoints
   static const String userProfile = '/users/me';
   static const String updateProfile = '/users/me';
   static const String changePassword = '/users/me/password';
   static const String deleteAccount = '/users/me';
 
-  // Common headers
   static const String authorizationHeader = 'Authorization';
   static const String bearerPrefix = 'Bearer';
   static const String contentTypeHeader = 'Content-Type';
   static const String acceptHeader = 'Accept';
   static const String applicationJson = 'application/json';
 }
-

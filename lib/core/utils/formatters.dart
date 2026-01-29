@@ -5,7 +5,7 @@ abstract class Formatters {
   /// Format currency
   static String currency(
     double amount, {
-    String symbol = '\$',
+    String symbol = r'$',
     int decimalDigits = 2,
     String locale = 'en_US',
   }) {
@@ -20,7 +20,7 @@ abstract class Formatters {
   /// Format compact currency (e.g., $1.2K, $3.5M)
   static String compactCurrency(
     double amount, {
-    String symbol = '\$',
+    String symbol = r'$',
     String locale = 'en_US',
   }) {
     final formatter = NumberFormat.compactCurrency(
@@ -197,4 +197,3 @@ abstract class Formatters {
     return '$allButLast, $conjunction ${items.last}';
   }
 }
-

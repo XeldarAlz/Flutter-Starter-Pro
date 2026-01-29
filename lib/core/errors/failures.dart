@@ -90,4 +90,3 @@ class PermissionFailure extends Failure {
     super.code = 'PERMISSION_ERROR',
   });
 }
-

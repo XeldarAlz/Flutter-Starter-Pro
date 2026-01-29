@@ -34,8 +34,7 @@ extension ContextExtensions on BuildContext {
       MediaQuery.orientationOf(this) == Orientation.landscape;
 
   /// Check if the device is in portrait mode
-  bool get isPortrait =>
-      MediaQuery.orientationOf(this) == Orientation.portrait;
+  bool get isPortrait => MediaQuery.orientationOf(this) == Orientation.portrait;
 
   /// Check if the keyboard is visible
   bool get isKeyboardVisible => MediaQuery.viewInsetsOf(this).bottom > 0;
@@ -95,4 +94,3 @@ extension ContextExtensions on BuildContext {
   /// Check if can pop
   bool get canPop => Navigator.of(this).canPop();
 }
-

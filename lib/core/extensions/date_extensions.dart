@@ -93,7 +93,6 @@ extension DateTimeExtensions on DateTime {
     final difference = now.difference(this);
 
     if (difference.isNegative) {
-      // Future
       final futureDiff = difference.abs();
       if (futureDiff.inDays > 365) {
         return 'in ${(futureDiff.inDays / 365).floor()} years';
@@ -109,7 +108,6 @@ extension DateTimeExtensions on DateTime {
         return 'in a moment';
       }
     } else {
-      // Past
       if (difference.inDays > 365) {
         return '${(difference.inDays / 365).floor()} years ago';
       } else if (difference.inDays > 30) {
@@ -152,4 +150,3 @@ extension DateTimeExtensions on DateTime {
     return result;
   }
 }
-

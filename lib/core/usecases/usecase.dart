@@ -1,3 +1,4 @@
+// ignore_for_file: one_member_abstracts
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_starter_pro/core/errors/failures.dart';
@@ -20,8 +21,8 @@ import 'package:flutter_starter_pro/core/errors/failures.dart';
 ///   }
 /// }
 /// ```
-abstract class UseCase<Type, Params> {
-  Future<Either<Failure, Type>> call(Params params);
+abstract class UseCase<T, Params> {
+  Future<Either<Failure, T>> call(Params params);
 }
 
 /// Base class for use cases that don't require parameters.
@@ -39,8 +40,8 @@ abstract class UseCase<Type, Params> {
 ///   }
 /// }
 /// ```
-abstract class UseCaseNoParams<Type> {
-  Future<Either<Failure, Type>> call();
+abstract class UseCaseNoParams<T> {
+  Future<Either<Failure, T>> call();
 }
 
 /// Base class for stream-based use cases that require parameters.
@@ -58,13 +59,13 @@ abstract class UseCaseNoParams<Type> {
 ///   }
 /// }
 /// ```
-abstract class StreamUseCase<Type, Params> {
-  Stream<Either<Failure, Type>> call(Params params);
+abstract class StreamUseCase<T, Params> {
+  Stream<Either<Failure, T>> call(Params params);
 }
 
 /// Base class for stream-based use cases that don't require parameters.
-abstract class StreamUseCaseNoParams<Type> {
-  Stream<Either<Failure, Type>> call();
+abstract class StreamUseCaseNoParams<T> {
+  Stream<Either<Failure, T>> call();
 }
 
 /// Empty params class for use cases that technically have params

@@ -88,15 +88,15 @@ abstract class FormValidators {
       return 'Password must be at least 8 characters';
     }
 
-    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+    if (!RegExp('[A-Z]').hasMatch(value)) {
       return 'Password must contain an uppercase letter';
     }
 
-    if (!RegExp(r'[a-z]').hasMatch(value)) {
+    if (!RegExp('[a-z]').hasMatch(value)) {
       return 'Password must contain a lowercase letter';
     }
 
-    if (!RegExp(r'[0-9]').hasMatch(value)) {
+    if (!RegExp('[0-9]').hasMatch(value)) {
       return 'Password must contain a number';
     }
 
@@ -119,7 +119,6 @@ abstract class FormValidators {
   static String? phone(String? value) {
     if (value == null || value.isEmpty) return null;
 
-    // Remove common formatting characters
     final cleaned = value.replaceAll(RegExp(r'[\s\-\(\)]'), '');
 
     if (!RegExp(r'^\+?[0-9]{10,15}$').hasMatch(cleaned)) {

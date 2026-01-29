@@ -100,4 +100,3 @@ class CancelledException extends AppException {
     super.stackTrace,
   });
 }
-

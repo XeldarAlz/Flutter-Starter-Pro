@@ -8,13 +8,7 @@ class AppLogger {
   AppLogger._();
 
   static final Logger _logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 2,
-      errorMethodCount: 8,
-      lineLength: 120,
-      colors: true,
-      printEmojis: true,
-    ),
+    printer: PrettyPrinter(),
     level: kDebugMode ? Level.debug : Level.info,
   );
 
@@ -88,4 +82,3 @@ class AppLogger {
     debug('👤 User Action: $action$paramsStr');
   }
 }
-

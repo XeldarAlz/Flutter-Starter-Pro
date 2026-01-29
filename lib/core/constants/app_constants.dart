@@ -37,4 +37,3 @@ abstract class AppConstants {
   /// Session timeout duration
   static const Duration sessionTimeout = Duration(hours: 24);
 }
-

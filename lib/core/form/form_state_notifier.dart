@@ -250,7 +250,7 @@ class SimpleFormNotifier extends StateNotifier<SimpleFormState> {
   bool get isValid => state.isValid;
 
   /// Set submitting state
-  void setSubmitting(bool isSubmitting) {
+  void setSubmitting({required bool isSubmitting}) {
     state = state.copyWith(isSubmitting: isSubmitting);
   }
 
