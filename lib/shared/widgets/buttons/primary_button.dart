@@ -4,9 +4,9 @@ import 'package:flutter_starter_pro/core/constants/app_constants.dart';
 /// Primary elevated button with loading state
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
-    super.key,
     required this.onPressed,
     required this.text,
+    super.key,
     this.isLoading = false,
     this.isDisabled = false,
     this.icon,
@@ -86,9 +86,9 @@ class PrimaryButton extends StatelessWidget {
 /// Secondary outlined button
 class SecondaryButton extends StatelessWidget {
   const SecondaryButton({
-    super.key,
     required this.onPressed,
     required this.text,
+    super.key,
     this.isLoading = false,
     this.isDisabled = false,
     this.icon,
@@ -162,9 +162,9 @@ class SecondaryButton extends StatelessWidget {
 /// Icon button with custom styling
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
-    super.key,
     required this.onPressed,
     required this.icon,
+    super.key,
     this.size = 48,
     this.iconSize = 24,
     this.backgroundColor,
@@ -206,7 +206,7 @@ class AppIconButton extends StatelessWidget {
 
     if (tooltip != null) {
       return Tooltip(
-        message: tooltip!,
+        message: tooltip,
         child: button,
       );
     }
@@ -214,4 +214,3 @@ class AppIconButton extends StatelessWidget {
     return button;
   }
 }
-

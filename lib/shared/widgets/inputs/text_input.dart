@@ -240,7 +240,7 @@ class SearchInput extends StatelessWidget {
       onFieldSubmitted: onSubmitted,
       autofocus: autofocus,
       textInputAction: TextInputAction.search,
-      suffixIcon: controller?.text.isNotEmpty == true
+      suffixIcon: controller?.text.isNotEmpty ?? false
           ? IconButton(
               icon: const Icon(Icons.clear, size: 20),
               onPressed: () {
@@ -252,4 +252,3 @@ class SearchInput extends StatelessWidget {
     );
   }
 }
-

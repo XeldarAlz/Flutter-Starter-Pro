@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /// Info card widget for displaying information
 class InfoCard extends StatelessWidget {
   const InfoCard({
-    super.key,
     required this.title,
+    super.key,
     this.subtitle,
     this.leading,
     this.trailing,
@@ -96,9 +96,9 @@ class InfoCard extends StatelessWidget {
 /// Stat card for displaying statistics
 class StatCard extends StatelessWidget {
   const StatCard({
-    super.key,
     required this.title,
     required this.value,
+    super.key,
     this.subtitle,
     this.icon,
     this.iconColor,
@@ -142,7 +142,6 @@ class StatCard extends StatelessWidget {
               ),
             )
           : null,
-      trailing: null,
     );
   }
 }
@@ -153,4 +152,3 @@ enum TrendDirection {
   down,
   neutral,
 }
-
