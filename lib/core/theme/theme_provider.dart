@@ -10,7 +10,6 @@ part 'theme_provider.g.dart';
 class ThemeModeNotifier extends _$ThemeModeNotifier {
   @override
   ThemeMode build() {
-    // Try to get saved theme preference
     final localStorage = ref.watch(localStorageProvider);
     final savedTheme = localStorage?.themeMode;
 
@@ -68,4 +67,3 @@ class ThemeModeNotifier extends _$ThemeModeNotifier {
 LocalStorage? localStorage(Ref ref) {
   return null;
 }
-

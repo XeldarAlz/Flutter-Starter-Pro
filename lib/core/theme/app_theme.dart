@@ -5,7 +5,6 @@ import 'package:flutter_starter_pro/core/theme/app_typography.dart';
 
 /// Application theme configuration
 abstract class AppTheme {
-  // Light Theme
   static ThemeData get lightTheme {
     final colorScheme = AppColors.lightColorScheme;
 
@@ -14,11 +13,7 @@ abstract class AppTheme {
       colorScheme: colorScheme,
       textTheme: AppTypography.textTheme,
       brightness: Brightness.light,
-
-      // Scaffold
       scaffoldBackgroundColor: AppColors.background,
-
-      // AppBar
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
@@ -32,9 +27,7 @@ abstract class AppTheme {
         ),
         iconTheme: const IconThemeData(color: AppColors.onSurface),
       ),
-
-      // Card
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -43,8 +36,6 @@ abstract class AppTheme {
         color: AppColors.surface,
         surfaceTintColor: Colors.transparent,
       ),
-
-      // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -57,8 +48,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Outlined Button
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -70,8 +59,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Text Button
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -82,8 +69,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Floating Action Button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -92,8 +77,6 @@ abstract class AppTheme {
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
       ),
-
-      // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surfaceVariant,
@@ -129,8 +112,6 @@ abstract class AppTheme {
           color: colorScheme.error,
         ),
       ),
-
-      // Bottom Navigation Bar
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 8,
         backgroundColor: AppColors.surface,
@@ -140,8 +121,6 @@ abstract class AppTheme {
         selectedLabelStyle: AppTypography.labelSmall,
         unselectedLabelStyle: AppTypography.labelSmall,
       ),
-
-      // Navigation Bar (Material 3)
       navigationBarTheme: NavigationBarThemeData(
         elevation: 0,
         backgroundColor: AppColors.surface,
@@ -165,8 +144,6 @@ abstract class AppTheme {
           return const IconThemeData(color: AppColors.textSecondary);
         }),
       ),
-
-      // Chip
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surfaceVariant,
         selectedColor: colorScheme.primaryContainer,
@@ -178,16 +155,12 @@ abstract class AppTheme {
         ),
         side: BorderSide.none,
       ),
-
-      // Divider
       dividerTheme: const DividerThemeData(
         color: AppColors.divider,
         thickness: 1,
         space: 1,
       ),
-
-      // Dialog
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         elevation: 8,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -201,8 +174,6 @@ abstract class AppTheme {
           color: AppColors.textSecondary,
         ),
       ),
-
-      // Bottom Sheet
       bottomSheetTheme: const BottomSheetThemeData(
         elevation: 8,
         backgroundColor: AppColors.surface,
@@ -211,8 +182,6 @@ abstract class AppTheme {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
       ),
-
-      // Snackbar
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
@@ -223,14 +192,10 @@ abstract class AppTheme {
           color: AppColors.surface,
         ),
       ),
-
-      // Progress Indicator
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: colorScheme.primary,
         linearTrackColor: colorScheme.primaryContainer,
       ),
-
-      // Switch
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -245,8 +210,6 @@ abstract class AppTheme {
           return AppColors.surfaceVariant;
         }),
       ),
-
-      // Checkbox
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -258,10 +221,8 @@ abstract class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
-        side: BorderSide(color: AppColors.border, width: 2),
+        side: const BorderSide(color: AppColors.border, width: 2),
       ),
-
-      // Radio
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -270,8 +231,6 @@ abstract class AppTheme {
           return AppColors.textSecondary;
         }),
       ),
-
-      // ListTile
       listTileTheme: ListTileThemeData(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
@@ -284,9 +243,7 @@ abstract class AppTheme {
           color: AppColors.textSecondary,
         ),
       ),
-
-      // Tab Bar
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: colorScheme.primary,
         unselectedLabelColor: AppColors.textSecondary,
         labelStyle: AppTypography.labelLarge,
@@ -300,7 +257,6 @@ abstract class AppTheme {
     );
   }
 
-  // Dark Theme
   static ThemeData get darkTheme {
     final colorScheme = AppColors.darkColorScheme;
 
@@ -309,11 +265,7 @@ abstract class AppTheme {
       colorScheme: colorScheme,
       textTheme: AppTypography.textTheme,
       brightness: Brightness.dark,
-
-      // Scaffold
       scaffoldBackgroundColor: AppColors.backgroundDark,
-
-      // AppBar
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
@@ -327,9 +279,7 @@ abstract class AppTheme {
         ),
         iconTheme: const IconThemeData(color: AppColors.onSurfaceDark),
       ),
-
-      // Card
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -338,8 +288,6 @@ abstract class AppTheme {
         color: AppColors.surfaceDark,
         surfaceTintColor: Colors.transparent,
       ),
-
-      // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -352,8 +300,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Outlined Button
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -365,8 +311,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Text Button
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -377,8 +321,6 @@ abstract class AppTheme {
           textStyle: AppTypography.labelLarge,
         ),
       ),
-
-      // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surfaceVariantDark,
@@ -414,8 +356,6 @@ abstract class AppTheme {
           color: colorScheme.error,
         ),
       ),
-
-      // Navigation Bar (Material 3)
       navigationBarTheme: NavigationBarThemeData(
         elevation: 0,
         backgroundColor: AppColors.surfaceDark,
@@ -439,16 +379,12 @@ abstract class AppTheme {
           return const IconThemeData(color: AppColors.textSecondaryDark);
         }),
       ),
-
-      // Divider
       dividerTheme: const DividerThemeData(
         color: AppColors.dividerDark,
         thickness: 1,
         space: 1,
       ),
-
-      // Dialog
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         elevation: 8,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -462,8 +398,6 @@ abstract class AppTheme {
           color: AppColors.textSecondaryDark,
         ),
       ),
-
-      // Bottom Sheet
       bottomSheetTheme: const BottomSheetThemeData(
         elevation: 8,
         backgroundColor: AppColors.surfaceDark,
@@ -472,8 +406,6 @@ abstract class AppTheme {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
       ),
-
-      // Snackbar
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
@@ -487,4 +419,3 @@ abstract class AppTheme {
     );
   }
 }
-

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 abstract class AppTypography {
   static const String _fontFamily = 'Poppins';
 
-  // Fallback to Google Fonts if local font is not available
   static TextStyle _baseTextStyle({
     required double fontSize,
     required FontWeight fontWeight,
@@ -33,7 +32,6 @@ abstract class AppTypography {
     }
   }
 
-  // Display Styles
   static TextStyle get displayLarge => _baseTextStyle(
         fontSize: 57,
         fontWeight: FontWeight.w400,
@@ -53,7 +51,6 @@ abstract class AppTypography {
         height: 1.22,
       );
 
-  // Headline Styles
   static TextStyle get headlineLarge => _baseTextStyle(
         fontSize: 32,
         fontWeight: FontWeight.w600,
@@ -72,7 +69,6 @@ abstract class AppTypography {
         height: 1.33,
       );
 
-  // Title Styles
   static TextStyle get titleLarge => _baseTextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w600,
@@ -93,7 +89,6 @@ abstract class AppTypography {
         letterSpacing: 0.1,
       );
 
-  // Body Styles
   static TextStyle get bodyLarge => _baseTextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
@@ -115,7 +110,6 @@ abstract class AppTypography {
         letterSpacing: 0.4,
       );
 
-  // Label Styles
   static TextStyle get labelLarge => _baseTextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -137,7 +131,6 @@ abstract class AppTypography {
         letterSpacing: 0.5,
       );
 
-  // Text Theme
   static TextTheme get textTheme => TextTheme(
         displayLarge: displayLarge,
         displayMedium: displayMedium,
@@ -156,4 +149,3 @@ abstract class AppTypography {
         labelSmall: labelSmall,
       );
 }
-
